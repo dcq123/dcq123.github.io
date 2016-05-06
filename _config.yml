@@ -70,6 +70,6 @@ theme: theme-next
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repository: https://github.com/dcq123/dcq.github.io.git
+  repository: https://github.com/dcq123/dcq123.github.io.git
   branch: master
   plugins: -hexo-generator-feed
