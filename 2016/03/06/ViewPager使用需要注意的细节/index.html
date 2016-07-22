@@ -1,0 +1,615 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="ViewPager是Support包中提供的类，使用也是相当广泛了，但是在使用中不同的场景可能需要不同的效果，此时就需要对ViewPager内部做些简单了解，了解其中一些可能变成坑的地方。
+
+默认多加载一页
+ViewPager在直接使用时默认会帮助我们加载下一页的界面及数据，当滚动到中间时，会保留前一个和后一个页面不被销毁，但是有些情况下我们可能不想让ViewPager去加载下一页页面及数据，例">
+<meta property="og:type" content="article">
+<meta property="og:title" content="ViewPager使用需要注意的细节">
+<meta property="og:url" content="http://yoursite.com/2016/03/06/ViewPager使用需要注意的细节/index.html">
+<meta property="og:site_name" content="dcq Home">
+<meta property="og:description" content="ViewPager是Support包中提供的类，使用也是相当广泛了，但是在使用中不同的场景可能需要不同的效果，此时就需要对ViewPager内部做些简单了解，了解其中一些可能变成坑的地方。
+
+默认多加载一页
+ViewPager在直接使用时默认会帮助我们加载下一页的界面及数据，当滚动到中间时，会保留前一个和后一个页面不被销毁，但是有些情况下我们可能不想让ViewPager去加载下一页页面及数据，例">
+<meta property="og:updated_time" content="2016-07-21T14:45:13.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="ViewPager使用需要注意的细节">
+<meta name="twitter:description" content="ViewPager是Support包中提供的类，使用也是相当广泛了，但是在使用中不同的场景可能需要不同的效果，此时就需要对ViewPager内部做些简单了解，了解其中一些可能变成坑的地方。
+
+默认多加载一页
+ViewPager在直接使用时默认会帮助我们加载下一页的界面及数据，当滚动到中间时，会保留前一个和后一个页面不被销毁，但是有些情况下我们可能不想让ViewPager去加载下一页页面及数据，例">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> ViewPager使用需要注意的细节 | dcq Home </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">dcq Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">不积跬步，无以至千里</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                ViewPager使用需要注意的细节
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-03-06T10:27:07+08:00" content="2016-03-06">
+              2016-03-06
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>ViewPager是Support包中提供的类，使用也是相当广泛了，但是在使用中不同的场景可能需要不同的效果，此时就需要对ViewPager内部做些简单了解，了解其中一些可能变成坑的地方。</p>
+</blockquote>
+<h4 id="默认多加载一页"><a href="#默认多加载一页" class="headerlink" title="默认多加载一页"></a>默认多加载一页</h4><blockquote>
+<p>ViewPager在直接使用时默认会帮助我们加载下一页的界面及数据，当滚动到中间时，会保留前一个和后一个页面不被销毁，但是有些情况下我们可能不想让ViewPager去加载下一页页面及数据，例如一些新闻APP，大多就是使用ViewPager+Fragment，当用户没有滑动到下一页就自动去加载下一页数据时显然会耗费用户流量，此时就需要修改ViewPage的这种默认加载。</p>
+</blockquote>
+<p>查看ViewPager代码会发现其定义了这个常量：</p>
+<pre><code>private static final int DEFAULT_OFFSCREEN_PAGES = 1;
+</code></pre><p>这个常量就是预加载的页面数量，可以直接根据需要将其设置为0，禁止默认加载。</p>
+<p>ps:由于ViewPager类在Support包中是一个独立的类，所以我们完全可以将其拿出来，对其进行定制修改，只需要全部复制，更换个包名即可放到我们自己的项目中使用。这样也就可以随意修改ViewPager的源码了。</p>
+<h4 id="ViewPager不动态刷新的问题"><a href="#ViewPager不动态刷新的问题" class="headerlink" title="ViewPager不动态刷新的问题"></a>ViewPager不动态刷新的问题</h4><blockquote>
+<p>ViewPager不能动态刷新，主要是因为其中的PagerAdapter的notifyDataSetChanged()方法会失效。其原因就是当ViewPager绘制完Item之后，ViewPager会将child标记成POSITION_UNCHANGED，这样就不会在notifyDataSetChanged调用时去更新这个Item中的View了，所以界面这个方法是重新PagerAdapter的getItemPosition()方法。</p>
+</blockquote>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">   <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemPosition</span><span class="params">(Object object)</span> </span>&#123;</div><div class="line">	<span class="comment">// 该方法源码中默认返回POSITION_UNCHANGED，记录为不再改变</span></div><div class="line">       <span class="keyword">return</span> POSITION_NONE;</div><div class="line">   &#125;</div></pre></td></tr></table></figure>
+<p>当我们调用PagerAdapter的notifyDataSetChanged方法之后，系统会去Adapter的getItemPosition方法中遍历所有的child，我们在上面的方法中改写了返回值，全部返回为POSITION_NONE，表示child都没有绘制过，这样ViewPager就会去重绘了。</p>
+<p>更加优化一点的代码如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyDataSetChanged</span><span class="params">()</span> </span>&#123;</div><div class="line">      mChildCount = getCount();</div><div class="line">      <span class="keyword">super</span>.notifyDataSetChanged();</div><div class="line">  &#125;</div><div class="line"></div><div class="line">  <span class="meta">@Override</span></div><div class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">getItemPosition</span><span class="params">(Object object)</span> </span>&#123;</div><div class="line">      <span class="comment">// 重写getItemPosition,保证每次获取时都强制重绘UI</span></div><div class="line">      <span class="keyword">if</span> (mChildCount &gt; <span class="number">0</span>) &#123;</div><div class="line">          mChildCount--;</div><div class="line">          <span class="keyword">return</span> POSITION_NONE;</div><div class="line">      &#125;</div><div class="line">      <span class="keyword">return</span> <span class="keyword">super</span>.getItemPosition(object);</div><div class="line">  &#125;</div></pre></td></tr></table></figure>
+<p>增加一个mChildCount的变量用来记录所有Item的数量，避免在数据集无变化时调用notifyDataSetChanged()导致不必要的重绘动作，重而避免增加系统开销，因为重绘的时候，ViewPager会的Destory Item。</p>
+<p>更加优化的方法</p>
+<p>当我们只需要对ViewPager中的某些元素进行更新时，我们可以在instantiateItem方法调用时，用View.setTag方法加入标志，在需要更新View时，通过findViewWithTag的方法找到对应的View进行更新。</p>
+<h4 id="点击按钮切换ViewPager时会看不到切换动画的问题"><a href="#点击按钮切换ViewPager时会看不到切换动画的问题" class="headerlink" title="点击按钮切换ViewPager时会看不到切换动画的问题"></a>点击按钮切换ViewPager时会看不到切换动画的问题</h4><p>场景描述：</p>
+<blockquote>
+<p>在需要通过两个左右箭头图片点击来实现ViewPager的切换时，往往会看不到想滑动时候的那种动画效果，主要原因是在点击进行切换时，ViewPager的切换速度太快导致基本看不见动画pager就已经切换了。这时就需要对ViewPager的滚动进行控制。ViewPager内部维护了一个Scroller专门负责计算滚动距离，使用它时会根据距离和速度计算滚动持续的时间，而且ViewPager的Scroller在初始化时设置了一个加速的动画插入器(Interpolator)。</p>
+</blockquote>
+<p>在ViewPager的initViewPager()中对Scroller进行了初始化。</p>
+<pre><code>mScroller = new Scroller(context, sInterpolator);
+</code></pre><p>sInterpolator在ViewPager中的实现如下：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> Interpolator sInterpolator = <span class="keyword">new</span> Interpolator() &#123;</div><div class="line">       <span class="function"><span class="keyword">public</span> <span class="keyword">float</span> <span class="title">getInterpolation</span><span class="params">(<span class="keyword">float</span> t)</span> </span>&#123;</div><div class="line">           --t;</div><div class="line">           <span class="keyword">return</span> t * t * t * t * t + <span class="number">1.0F</span>;</div><div class="line">       &#125;</div><div class="line">   &#125;;</div></pre></td></tr></table></figure>
+<p>真正进行滚动切换是在smoothScrollTo(int x, int y, int velocity)中：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">velocity = Math.abs(velocity);</div><div class="line">   <span class="keyword">int</span> duration1;</div><div class="line">   <span class="keyword">if</span>(velocity &gt; <span class="number">0</span>) &#123;</div><div class="line">	<span class="comment">// 1、滑动的时候计算出来的滚动时间</span></div><div class="line">       duration1 = <span class="number">4</span> * Math.round(<span class="number">1000.0F</span> * Math.abs(distance / (<span class="keyword">float</span>)velocity));</div><div class="line">   &#125; <span class="keyword">else</span> &#123;</div><div class="line">	<span class="comment">// 2、不是滑动时计算出来的滚动时间</span></div><div class="line">       <span class="keyword">float</span> pageWidth = (<span class="keyword">float</span>)width * <span class="keyword">this</span>.mAdapter.getPageWidth(<span class="keyword">this</span>.mCurItem);</div><div class="line">       <span class="keyword">float</span> pageDelta = (<span class="keyword">float</span>)Math.abs(dx) / (pageWidth + (<span class="keyword">float</span>)<span class="keyword">this</span>.mPageMargin);</div><div class="line">       duration1 = (<span class="keyword">int</span>)((pageDelta + <span class="number">1.0F</span>) * <span class="number">100.0F</span>);</div><div class="line">   &#125;</div><div class="line"><span class="comment">// 根据计算出来的时间和默认设置的最大时间常量进行取小者操作</span></div><div class="line"><span class="comment">// 也就表示ViewPager最大的滚动时间上限是600ms</span></div><div class="line">   duration1 = Math.min(duration1, <span class="number">600</span>);</div><div class="line"><span class="comment">// 设置Scroller开始滚动</span></div><div class="line">   <span class="keyword">this</span>.mScroller.startScroll(sx, sy, dx, dy, duration1);</div><div class="line">   ViewCompat.postInvalidateOnAnimation(<span class="keyword">this</span>);</div><div class="line"></div></pre></td></tr></table></figure>
+<p>知道以上地方，我们就可以修改ViewPager的源码，来控制点击切换是的滚动时间，使其能正常看到动画效果。</p>
+<ul>
+<li><p>修改初始化Scroller时的动画插入器，将其设置为线性加速，这样动画效果才会看的更平滑一些。</p>
+<pre><code>mScroller = new Scroller(context, new LinearInterpolator());
+</code></pre></li>
+<li><p>修改smoothScrollTo(int x, int y, int velocity)中最后一部分的代码，控制点击滚动时计算出来的时间：</p>
+</li>
+</ul>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line">velocity = Math.abs(velocity);</div><div class="line">   <span class="keyword">if</span> (velocity &gt; <span class="number">0</span>) &#123;</div><div class="line">       duration = <span class="number">4</span> * Math.round(<span class="number">1000</span> * Math.abs(distance / velocity));</div><div class="line">   &#125; <span class="keyword">else</span> &#123;</div><div class="line">	<span class="comment">// 点击切换时的滚动时间设置</span></div><div class="line">       <span class="comment">// 此处是直接使用setCurrentItem方法来切换ViewPager,这种情况动画效果不明显，所以在此增加动画的持续时间</span></div><div class="line">       duration = <span class="number">400</span>;</div><div class="line">       mScroller.startScroll(sx, sy, dx, dy, duration);</div><div class="line">       ViewCompat.postInvalidateOnAnimation(<span class="keyword">this</span>);</div><div class="line">       <span class="keyword">return</span>;</div><div class="line">   &#125;</div><div class="line"><span class="comment">// 滑动切换时的时间设置</span></div><div class="line">   duration = Math.min(duration, MAX_SETTLE_DURATION);</div><div class="line">   <span class="comment">// 滑动切换Item时，如果duration大于300ms，则手动设置其为300ms，保证滑动切换迅速</span></div><div class="line">   duration = duration &gt; <span class="number">300</span> ? <span class="number">300</span> : duration;</div><div class="line">   mScroller.startScroll(sx, sy, dx, dy, duration);</div><div class="line">   ViewCompat.postInvalidateOnAnimation(<span class="keyword">this</span>);</div><div class="line"></div></pre></td></tr></table></figure>
+<p>通过这样就控制了点击翻页的动画显示。</p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2016/03/06/Android并不常用但是很强大的API汇总/" rel="prev" title="Android并不常用但是很强大的API汇总">
+                Android并不常用但是很强大的API汇总 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/icon.jpg"
+               alt="dingchangqing" />
+          <p class="site-author-name" itemprop="name">dingchangqing</p>
+          <p class="site-description motion-element" itemprop="description">这是第一个hexo网站</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">4</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">1</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#默认多加载一页"><span class="nav-number">1.</span> <span class="nav-text">默认多加载一页</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ViewPager不动态刷新的问题"><span class="nav-number">2.</span> <span class="nav-text">ViewPager不动态刷新的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#点击按钮切换ViewPager时会看不到切换动画的问题"><span class="nav-number">3.</span> <span class="nav-text">点击按钮切换ViewPager时会看不到切换动画的问题</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dingchangqing</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
