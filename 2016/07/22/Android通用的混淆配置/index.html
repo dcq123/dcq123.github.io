@@ -1,0 +1,685 @@
+<!doctype html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
+
+
+  <meta name="keywords" content="Android,混淆," />
+
+
+
+
+
+
+
+
+  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
+
+
+
+
+
+
+<meta name="description" content="Android 程序开发中，在打release包时一般都会对APP进行混淆，一方面是为了压缩和优化代码，另一方面也是为了给反编译添加一层保障；当然并不是说只有release包可以混淆，debug包也是可以混淆的，只是混淆后debug包断点无法正常调试。
+本文搜集并结合自己的理解，将混淆的使用以及注意事项加以总结，最后提供一个通用的混淆模板，方便自己查看和使用。
+
+Proguard介绍
+ProGu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Android通用的混淆配置">
+<meta property="og:url" content="http://yoursite.com/2016/07/22/Android通用的混淆配置/index.html">
+<meta property="og:site_name" content="dcq Home">
+<meta property="og:description" content="Android 程序开发中，在打release包时一般都会对APP进行混淆，一方面是为了压缩和优化代码，另一方面也是为了给反编译添加一层保障；当然并不是说只有release包可以混淆，debug包也是可以混淆的，只是混淆后debug包断点无法正常调试。
+本文搜集并结合自己的理解，将混淆的使用以及注意事项加以总结，最后提供一个通用的混淆模板，方便自己查看和使用。
+
+Proguard介绍
+ProGu">
+<meta property="og:updated_time" content="2016-07-22T08:06:27.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Android通用的混淆配置">
+<meta name="twitter:description" content="Android 程序开发中，在打release包时一般都会对APP进行混淆，一方面是为了压缩和优化代码，另一方面也是为了给反编译添加一层保障；当然并不是说只有release包可以混淆，debug包也是可以混淆的，只是混淆后debug包断点无法正常调试。
+本文搜集并结合自己的理解，将混淆的使用以及注意事项加以总结，最后提供一个通用的混淆模板，方便自己查看和使用。
+
+Proguard介绍
+ProGu">
+
+
+
+<script type="text/javascript" id="hexo.configuration">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    scheme: 'Mist',
+    sidebar: {"position":"left","display":"post"},
+    fancybox: true,
+    motion: true,
+    duoshuo: {
+      userId: 0,
+      author: '博主'
+    }
+  };
+</script>
+
+  <title> Android通用的混淆配置 | dcq Home </title>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  
+    
+  
+
+  <div class="container one-collumn sidebar-position-left page-post-detail ">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-meta ">
+  
+
+  <div class="custom-logo-site-title">
+    <a href="/"  class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <span class="site-title">dcq Home</span>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+  <p class="site-subtitle">不积跬步，无以至千里</p>
+</div>
+
+<div class="site-nav-toggle">
+  <button>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+    <span class="btn-bar"></span>
+  </button>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+            
+            
+              
+                Android通用的混淆配置
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            <span class="post-meta-item-icon">
+              <i class="fa fa-calendar-o"></i>
+            </span>
+            <span class="post-meta-item-text">发表于</span>
+            <time itemprop="dateCreated" datetime="2016-07-22T12:01:04+08:00" content="2016-07-22">
+              2016-07-22
+            </time>
+          </span>
+
+          
+
+          
+            
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </header>
+    
+
+
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <blockquote>
+<p>Android 程序开发中，在打<code>release</code>包时一般都会对APP进行混淆，一方面是为了压缩和优化代码，另一方面也是为了给反编译添加一层保障；当然并不是说只有<code>release</code>包可以混淆，<code>debug</code>包也是可以混淆的，只是混淆后<code>debug</code>包断点无法正常调试。</p>
+<p>本文搜集并结合自己的理解，将混淆的使用以及注意事项加以总结，最后提供一个通用的混淆模板，方便自己查看和使用。</p>
+</blockquote>
+<h2 id="Proguard介绍"><a href="#Proguard介绍" class="headerlink" title="Proguard介绍"></a>Proguard介绍</h2><blockquote>
+<p><code>ProGuard</code>是一个开源的<code>Java</code>代码混淆器，由Google提供并集成在Android的tool工具中，它可以对项目中指定的<code>Java代码</code> 进行混淆，但只是对<code>Java代码</code> 的混淆，它无法混淆<code>native代码</code>，资源文件<code>drawable</code>、<code>xml</code>等，对于资源的混淆可以查看下面的<code>微信资源混淆库</code>。</p>
+</blockquote>
+<h3 id="Proguard的作用"><a href="#Proguard的作用" class="headerlink" title="Proguard的作用"></a>Proguard的作用</h3><ul>
+<li>压缩：移除无效的类、属性、方法等；</li>
+<li>优化：优化字节码，并删除无效的结构；</li>
+<li>混淆：将类名，属性名，方法名混淆为难以读懂的字母，提高了反编译并阅读源码的难度；</li>
+</ul>
+<h3 id="ProGuard的使用"><a href="#ProGuard的使用" class="headerlink" title="ProGuard的使用"></a>ProGuard的使用</h3><h4 id="常用语法"><a href="#常用语法" class="headerlink" title="常用语法"></a>常用语法</h4><h5 id="保留"><a href="#保留" class="headerlink" title="保留"></a>保留</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div></pre></td><td class="code"><pre><div class="line">// 保护指定的类文件和类成员</div><div class="line">-keep &#123;Modifier&#125; &#123;class_specification&#125; </div><div class="line">// 保护指定类的成员，如果此类受到保护他们会保护的更好</div><div class="line">-keepclassmembers &#123;modifier&#125; &#123;class_specification&#125; </div><div class="line">// 保护指定的类和类的成员，但条件是所有指定的类和类成员是要存在</div><div class="line">-keepclasseswithmembers &#123;class_specification&#125; </div><div class="line">// 保护指定的类和类的成员的名称(如果他们不会在压缩步骤中删除)</div><div class="line">-keepnames &#123;class_specification&#125;</div><div class="line">// 保护指定的类的成员的名称(如果他们不会在压缩步骤中删除)</div><div class="line">-keepclassmembernames &#123;class_specification&#125; </div><div class="line">// 保护指定的类和类的成员名称</div><div class="line">-keepclasseswithmembernames &#123;class_specification&#125; </div><div class="line">// 列出类和类的成员-keep选项的清单，标准输出到给定的文件</div><div class="line">-printseeds &#123;filename&#125;</div></pre></td></tr></table></figure>
+<h5 id="压缩"><a href="#压缩" class="headerlink" title="压缩"></a>压缩</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-dontshrink 不压缩输入的类文件</div><div class="line">-printusage &#123;filename&#125;</div><div class="line">whyareyoukeeping &#123;class_specification&#125;</div></pre></td></tr></table></figure>
+<h5 id="优化"><a href="#优化" class="headerlink" title="优化"></a>优化</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-dontoptimize 不优化输入的类文件</div><div class="line">-assumenosideeffects &#123;class_specification&#125; 优化时假设指定的方法，没有任何副作用</div><div class="line">-allowaccessmodification 优化时允许访问并修改有修饰符的类和类的成员</div></pre></td></tr></table></figure>
+<h5 id="混淆"><a href="#混淆" class="headerlink" title="混淆"></a>混淆</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line">-dontobfuscate 不混淆输入的类文件</div><div class="line">-obfuscationdictionary &#123;filename&#125; 使用给定文件中的关键字作为要混淆方法的名称</div><div class="line">-overloadaggressively 混淆时应用侵入式重载</div><div class="line">-useuniqueclassmembernames 确定统一的混淆类的成员名称来增加混淆</div><div class="line">-flattenpackagehierarchy &#123;package_name&#125; 重新包装所有重命名的包并放在给定的单一包中</div><div class="line">-repackageclass &#123;package_name&#125; 重新包装所有重命名的类文件中放在给定的单一包中</div><div class="line">-dontusemixedcaseclassnames 混淆时不会产生形形色色的类名</div><div class="line">-keepattributes &#123;attribute_name,…&#125; 保护给定的可选属性，例如LineNumberTable, LocalVariableTable, SourceFile, Deprecated, Synthetic, Signature, and InnerClasses.</div><div class="line">-renamesourcefileattribute &#123;string&#125; 设置源文件中给定的字符串常量</div></pre></td></tr></table></figure>
+<h5 id="通配符匹配规则"><a href="#通配符匹配规则" class="headerlink" title="通配符匹配规则"></a>通配符匹配规则</h5><table>
+<thead>
+<tr>
+<th>通配符</th>
+<th>规则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>？</td>
+<td>匹配单个字符</td>
+</tr>
+<tr>
+<td>*</td>
+<td>匹配类名中的任何部分，但不包含额外的包名</td>
+</tr>
+<tr>
+<td>**</td>
+<td>匹配类名中的任何部分，并且可以包含额外的包名</td>
+</tr>
+<tr>
+<td>%</td>
+<td>匹配任何基础类型的类型名</td>
+</tr>
+<tr>
+<td><em>*</em></td>
+<td>匹配任意类型名 ,包含基础类型/非基础类型</td>
+</tr>
+<tr>
+<td>…</td>
+<td>匹配任意数量、任意类型的参数</td>
+</tr>
+<tr>
+<td><code>&lt;init&gt;</code></td>
+<td>匹配任何构造器</td>
+</tr>
+<tr>
+<td><code>&lt;ifield&gt;</code></td>
+<td>匹配任何字段名</td>
+</tr>
+<tr>
+<td><code>&lt;imethod&gt;</code></td>
+<td>匹配任何方法</td>
+</tr>
+<tr>
+<td>*(当用在类内部时)</td>
+<td>匹配任何字段和方法</td>
+</tr>
+<tr>
+<td>$</td>
+<td>指内部类</td>
+</tr>
+</tbody>
+</table>
+<p>[更详细的语法请戳:<a href="http://proguard.sourceforge.net/manual/usage.html#classspecification" target="_blank" rel="external">http://proguard.sourceforge.net/manual/usage.html#classspecification</a>]</p>
+<h4 id="AndroidStudio中的使用"><a href="#AndroidStudio中的使用" class="headerlink" title="AndroidStudio中的使用"></a>AndroidStudio中的使用</h4><blockquote>
+<p>按照上面的混淆规则将需要保留的声明添加到项目的<code>proguard-rules.pro</code> 文件中，然后在<code>build.gradle</code> 文件中打开混淆开关。</p>
+</blockquote>
+<figure class="highlight groovy"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line">buildTypes &#123;</div><div class="line">        debug &#123;</div><div class="line">            minifyEnabled <span class="literal">false</span></div><div class="line">        &#125;</div><div class="line">        release &#123;</div><div class="line">            <span class="comment">// 打开混淆开关</span></div><div class="line">            minifyEnabled <span class="literal">true</span></div><div class="line">            proguardFiles getDefaultProguardFile(<span class="string">'proguard-android.txt'</span>), <span class="string">'proguard-rules.pro'</span></div><div class="line">        &#125;</div><div class="line">    &#125;</div></pre></td></tr></table></figure>
+<h5 id="不混淆指定包下的所有类和接口"><a href="#不混淆指定包下的所有类和接口" class="headerlink" title="不混淆指定包下的所有类和接口"></a>不混淆指定包下的所有类和接口</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line"># 不混淆com.usolv.offlinepaysdk.utils包下的所有类和接口</div><div class="line">-keep class com.usolv.offlinepaysdk.utils.** &#123; *; &#125;</div><div class="line"></div><div class="line"># 不混淆com.usolv.offlinepaysdk.utils包下的Base64这个类</div><div class="line">-keep class com.usolv.offlinepaysdk.utils.Base64 &#123; *; &#125;</div></pre></td></tr></table></figure>
+<h5 id="不混淆构造函数"><a href="#不混淆构造函数" class="headerlink" title="不混淆构造函数"></a>不混淆构造函数</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div></pre></td><td class="code"><pre><div class="line"># 先保证Toastor类的名称不被混淆</div><div class="line">-keepnames class com.usolv.offlinepaysdk.utils.Toastor&#123;&#125;</div><div class="line"># 在指定不混淆指定类的构造方法</div><div class="line">-keepclassmembers class com.usolv.offlinepaysdk.utils.Toastor &#123;</div><div class="line">	# 构造参数的类型和个数必须匹配</div><div class="line">    public &lt;init&gt; (android.content.Context);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="不混淆指定类的指定方法"><a href="#不混淆指定类的指定方法" class="headerlink" title="不混淆指定类的指定方法"></a>不混淆指定类的指定方法</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"></div><div class="line"># 不混淆Toastor类的getToast方法</div><div class="line">-keepnames class com.usolv.offlinepaysdk.utils.Toastor&#123;&#125;</div><div class="line">-keepclassmembers class com.usolv.offlinepaysdk.utils.Toastor&#123;</div><div class="line">    public android.widget.Toast getToast(java.lang.String);</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h5 id="不混淆某个类的子类"><a href="#不混淆某个类的子类" class="headerlink" title="不混淆某个类的子类"></a>不混淆某个类的子类</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div></pre></td><td class="code"><pre><div class="line"># 不混淆Test的子类</div><div class="line">-keep public class * extends com.ticktick.example.Test</div></pre></td></tr></table></figure>
+<h5 id="不混淆某个接口的实现"><a href="#不混淆某个接口的实现" class="headerlink" title="不混淆某个接口的实现"></a>不混淆某个接口的实现</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">-keep class * implementscom.ticktick.example.TestInterface &#123;</div><div class="line">    public static final com.ticktick.example.TestInterface$Creator *;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
+<h3 id="混淆注意事项"><a href="#混淆注意事项" class="headerlink" title="混淆注意事项"></a>混淆注意事项</h3><h4 id="不能混淆"><a href="#不能混淆" class="headerlink" title="不能混淆"></a>不能混淆</h4><ul>
+<li>在AndroidManifest中配置的类，如四大组件；</li>
+<li>JNI调用的方法；</li>
+<li>反射用到的类；</li>
+<li>WebView中JS用到的方法；</li>
+<li>自定义的View</li>
+<li>一些引入的第三方库(一般会提供混淆说明)</li>
+</ul>
+<h4 id="Crash信息处理"><a href="#Crash信息处理" class="headerlink" title="Crash信息处理"></a>Crash信息处理</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div></pre></td><td class="code"><pre><div class="line">代码混淆的时候记得加上在混淆文件里面记得加上这句，否则在崩溃的日志中很难定位代码位置： </div><div class="line"># keep住源文件以及行号 </div><div class="line">-keepattributes SourceFile,LineNumberTable</div></pre></td></tr></table></figure>
+<p>这里推荐bugly的一篇文章： <a href="http://bugly.qq.com/bbs/forum.php?mod=viewthread&amp;tid=26&amp;extra=page%3D1" target="_blank" rel="external">http://bugly.qq.com/bbs/forum.php?mod=viewthread&amp;tid=26&amp;extra=page%3D1</a></p>
+<h2 id="第三方混淆库"><a href="#第三方混淆库" class="headerlink" title="第三方混淆库"></a>第三方混淆库</h2><blockquote>
+<p><code>github</code> 上面开源了一些专门收集不同第三方lib的混淆配置，方便了我们在混淆时对不同库混淆规则的查找。</p>
+</blockquote>
+<ul>
+<li><a href="https://github.com/krschultz/android-proguard-snippets" target="_blank" rel="external">android-proguard-snippets</a></li>
+<li><a href="https://github.com/msdx/android-proguard-cn" target="_blank" rel="external">android-proguard-cn</a></li>
+<li><a href="https://github.com/zhonghanwen/AndroidProguardPlugin" target="_blank" rel="external">Android Studio混淆插件</a></li>
+<li><a href="https://github.com/shwenzhang/AndResGuard" target="_blank" rel="external">微信资源混淆库</a></li>
+</ul>
+<h2 id="通用混淆模板"><a href="#通用混淆模板" class="headerlink" title="通用混淆模板"></a>通用混淆模板</h2><blockquote>
+<p>以下提供一个简单的混淆模板，其中只包含了<code>android</code> 的混淆，不包含第三方类库</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div><div class="line">59</div><div class="line">60</div><div class="line">61</div><div class="line">62</div><div class="line">63</div><div class="line">64</div><div class="line">65</div><div class="line">66</div><div class="line">67</div><div class="line">68</div><div class="line">69</div><div class="line">70</div></pre></td><td class="code"><pre><div class="line">-optimizationpasses 5</div><div class="line">#混淆时不会产生形形色色的类名</div><div class="line">-dontusemixedcaseclassnames</div><div class="line">#指定不去忽略非公共的类库</div><div class="line">-dontskipnonpubliclibraryclasses</div><div class="line">#不进行预校验</div><div class="line">-dontpreverify</div><div class="line">-verbose</div><div class="line">#优化操作</div><div class="line">-optimizations !code/simplification/arithmetic,!field/*,!class/merging/*</div><div class="line"># keep住源文件以及行号,否则在出现崩溃信息后无法查看到位置</div><div class="line">-keepattributes SourceFile,LineNumberTable</div><div class="line"></div><div class="line">###通用混淆###</div><div class="line"></div><div class="line"># 对于继承Android的四大组件等系统类，保持原样</div><div class="line">-keep public class * extends android.app.Activity</div><div class="line">-keep public class * extends android.app.Application</div><div class="line">-keep public class * extends android.app.Service</div><div class="line">-keep public class * extends android.content.BroadcastReceiver</div><div class="line">-keep public class * extends android.content.ContentProvider</div><div class="line">-keep public class * extends android.app.backup.BackupAgentHelper</div><div class="line">-keep public class * extends android.preference.Preference</div><div class="line">-keep public class com.android.vending.licensing.ILicensingService</div><div class="line">-keep class android.support.**&#123;*;&#125;</div><div class="line">-keep class android.support.v4.** &#123; *; &#125;</div><div class="line">-keep interface android.support.v4.app.** &#123; *; &#125;</div><div class="line">-keep public class * extends android.support.v4.**</div><div class="line">-dontwarn android.support.v4.**</div><div class="line">-dontwarn com.android.support.**</div><div class="line">-dontwarn android.support.**</div><div class="line"># 保对所有类的native方法名不进行混淆</div><div class="line">-keepclasseswithmembernames class *&#123;</div><div class="line">    native &lt;methods&gt;;</div><div class="line">&#125;</div><div class="line"># 对所有类的初始化方法的方法名不进行混淆</div><div class="line">-keepclasseswithmembers class *&#123;</div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet);</div><div class="line">&#125;</div><div class="line">-keepclasseswithmembers class *&#123;</div><div class="line">    public &lt;init&gt;(android.content.Context, android.util.AttributeSet,int);</div><div class="line">&#125;</div><div class="line"># 保护继承至View对象中的set/get方法</div><div class="line">-keepclassmembers public class * extends android.view.View &#123;</div><div class="line">   void set*(***);</div><div class="line">   *** get*();</div><div class="line">&#125;</div><div class="line"># 对枚举类型enum的所有类的以下指定方法的方法名不进行混淆</div><div class="line">-keepclassmembers enum * &#123;</div><div class="line">    public static **[] values();</div><div class="line">    public static ** valueOf(java.lang.String);</div><div class="line">&#125;</div><div class="line"># 对实现了Parcelable接口的所有类的类名不进行混淆，对其成员变量为Parcelable$Creator类型的成员变量的变量名不进行混淆</div><div class="line">-keep class * implements android.os.Parcelable &#123;</div><div class="line">  public static final android.os.Parcelable$Creator *;</div><div class="line">&#125;</div><div class="line"></div><div class="line">###APP内自己的类混淆配置 ###</div><div class="line"></div><div class="line"># 不混淆com.usolv.offlinepaysdk.utils包下的所有类和接口</div><div class="line">#-keep class com.usolv.offlinepaysdk.utils.Base64 &#123; *; &#125;</div><div class="line"></div><div class="line"># 不混淆指定类的指定方法</div><div class="line">-keepnames class com.usolv.offlinepaysdk.utils.Toastor&#123;&#125;</div><div class="line">-keepclassmembers class com.usolv.offlinepaysdk.utils.Toastor&#123;</div><div class="line">    public android.widget.Toast getToast(java.lang.String);</div><div class="line">&#125;</div><div class="line"></div><div class="line">###第三方类库混淆配置###</div><div class="line"># 第三方类库的混淆可以参看类库对应的github上的混淆规则，如果某些类库没有声明混淆规则，就需要自己去测试验证是否需要进行混淆</div></pre></td></tr></table></figure>
+<h2 id="参考"><a href="#参考" class="headerlink" title="参考"></a>参考</h2><p><a href="https://segmentfault.com/a/1190000004461614" target="_blank" rel="external">Android分享：代码混淆那些事</a></p>
+<p><a href="http://ticktick.blog.51cto.com/823160/1413066" target="_blank" rel="external">Android开发实践：利用ProGuard进行代码混淆</a></p>
+
+      
+    </div>
+
+    <div>
+      
+        
+      
+    </div>
+
+    <div>
+      
+        
+
+      
+    </div>
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Android/" rel="tag">#Android</a>
+          
+            <a href="/tags/混淆/" rel="tag">#混淆</a>
+          
+        </div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2016/07/22/MarkDown写作常用命令/" rel="next" title="MarkDown写作常用命令">
+                <i class="fa fa-chevron-left"></i> MarkDown写作常用命令
+              </a>
+            
+          </div>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments">
+    
+  </div>
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview sidebar-panel ">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <img class="site-author-image" itemprop="image"
+               src="/images/icon.jpg"
+               alt="dingchangqing" />
+          <p class="site-author-name" itemprop="name">dingchangqing</p>
+          <p class="site-description motion-element" itemprop="description">这是第一个hexo网站</p>
+        </div>
+        <nav class="site-state motion-element">
+          <div class="site-state-item site-state-posts">
+            <a href="/archives">
+              <span class="site-state-item-count">5</span>
+              <span class="site-state-item-name">日志</span>
+            </a>
+          </div>
+
+          
+
+          
+            <div class="site-state-item site-state-tags">
+              <a href="/tags">
+                <span class="site-state-item-count">4</span>
+                <span class="site-state-item-name">标签</span>
+              </a>
+            </div>
+          
+
+        </nav>
+
+        
+
+        <div class="links-of-author motion-element">
+          
+        </div>
+
+        
+        
+
+        
+        
+
+      </section>
+
+      
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+            
+              
+            
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Proguard介绍"><span class="nav-number">1.</span> <span class="nav-text">Proguard介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Proguard的作用"><span class="nav-number">1.1.</span> <span class="nav-text">Proguard的作用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ProGuard的使用"><span class="nav-number">1.2.</span> <span class="nav-text">ProGuard的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#常用语法"><span class="nav-number">1.2.1.</span> <span class="nav-text">常用语法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#保留"><span class="nav-number">1.2.1.1.</span> <span class="nav-text">保留</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#压缩"><span class="nav-number">1.2.1.2.</span> <span class="nav-text">压缩</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#优化"><span class="nav-number">1.2.1.3.</span> <span class="nav-text">优化</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#混淆"><span class="nav-number">1.2.1.4.</span> <span class="nav-text">混淆</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#通配符匹配规则"><span class="nav-number">1.2.1.5.</span> <span class="nav-text">通配符匹配规则</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AndroidStudio中的使用"><span class="nav-number">1.2.2.</span> <span class="nav-text">AndroidStudio中的使用</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#不混淆指定包下的所有类和接口"><span class="nav-number">1.2.2.1.</span> <span class="nav-text">不混淆指定包下的所有类和接口</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不混淆构造函数"><span class="nav-number">1.2.2.2.</span> <span class="nav-text">不混淆构造函数</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不混淆指定类的指定方法"><span class="nav-number">1.2.2.3.</span> <span class="nav-text">不混淆指定类的指定方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不混淆某个类的子类"><span class="nav-number">1.2.2.4.</span> <span class="nav-text">不混淆某个类的子类</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#不混淆某个接口的实现"><span class="nav-number">1.2.2.5.</span> <span class="nav-text">不混淆某个接口的实现</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#混淆注意事项"><span class="nav-number">1.3.</span> <span class="nav-text">混淆注意事项</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#不能混淆"><span class="nav-number">1.3.1.</span> <span class="nav-text">不能混淆</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Crash信息处理"><span class="nav-number">1.3.2.</span> <span class="nav-text">Crash信息处理</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#第三方混淆库"><span class="nav-number">2.</span> <span class="nav-text">第三方混淆库</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#通用混淆模板"><span class="nav-number">3.</span> <span class="nav-text">通用混淆模板</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考"><span class="nav-number">4.</span> <span class="nav-text">参考</span></a></li></ol></div>
+            
+          </div>
+        </section>
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright" >
+  
+  &copy; 
+  <span itemprop="copyrightYear">2016</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">dingchangqing</span>
+</div>
+
+<div class="powered-by">
+  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+</div>
+
+<div class="theme-info">
+  主题 -
+  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
+    NexT.Mist
+  </a>
+</div>
+
+        
+
+        
+      </div>
+    </footer>
+
+    <div class="back-to-top">
+      <i class="fa fa-arrow-up"></i>
+    </div>
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+
+  
+  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
+
+
+
+  
+
+
+
+  
+
+
+
+  
+  
+  
+
+  
+
+  
+
+</body>
+</html>
