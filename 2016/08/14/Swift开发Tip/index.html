@@ -107,7 +107,7 @@ Swift调用OC库
 创建桥接头文件
 一般项目中有一个bridging头文件就行了，一般命名格式xxx-Bridging-Header.h，在该文件">
 <meta property="og:image" content="http://yoursite.com/2016/08/14/Swift开发Tip/swift-birdging-header.png">
-<meta property="og:updated_time" content="2016-08-14T09:34:32.000Z">
+<meta property="og:updated_time" content="2016-09-04T12:47:39.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Swift开发Tip">
 <meta name="twitter:description" content="本文收集Swift开发中的一些小知识点，持续添加更新中…
@@ -353,6 +353,7 @@ Swift调用OC库
 <p>这种写法不仅简洁，而且保证了单例的独一无二；在初始化类变量的时候，IOS 将会把这个初始化包装在一次 <code>swift_once_block_invoke</code> 中，以保证它的唯一性。</p>
 </li>
 </ul>
+<h3 id="延迟调用"><a href="#延迟调用" class="headerlink" title="延迟调用"></a>延迟调用</h3><figure class="highlight swift"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">let</span> time: <span class="type">NSTimeInterval</span> = <span class="number">2.0</span></div><div class="line"><span class="keyword">let</span> delay = dispatch_time(<span class="type">DISPATCH_TIME_NOW</span>, </div><div class="line">                         <span class="type">Int64</span>(time * <span class="type">Double</span>(<span class="type">NSEC_PER_SEC</span>)))</div><div class="line">dispatch_after(delay, dispatch_get_main_queue()) &#123;</div><div class="line">    <span class="built_in">println</span>(<span class="string">"2 秒后输出"</span>)</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 
       
     </div>
@@ -496,7 +497,7 @@ Swift调用OC库
               
             
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift调用OC库"><span class="nav-number">1.</span> <span class="nav-text">Swift调用OC库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建单例对象"><span class="nav-number">2.</span> <span class="nav-text">创建单例对象</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Swift调用OC库"><span class="nav-number">1.</span> <span class="nav-text">Swift调用OC库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建单例对象"><span class="nav-number">2.</span> <span class="nav-text">创建单例对象</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#延迟调用"><span class="nav-number">3.</span> <span class="nav-text">延迟调用</span></a></li></ol></div>
             
           </div>
         </section>
