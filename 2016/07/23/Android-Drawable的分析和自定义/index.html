@@ -1,90 +1,14 @@
-<!doctype html>
-
-
-
-  
-
-
-<html class="theme-next mist use-motion">
+<!DOCTYPE html>
+<html>
 <head>
-  <meta charset="UTF-8"/>
-<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
-
-
-
-<meta http-equiv="Cache-Control" content="no-transform" />
-<meta http-equiv="Cache-Control" content="no-siteapp" />
-
-
-
-
-
-
-
-
-
-
-
-
+  <meta charset="utf-8">
   
-  
-  <link href="/vendors/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
-
-
-
-
-  
-  
-  
-  
-
-  
-    
-    
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-    
-    
-    <link href="//fonts.googleapis.com/css?family=Lato:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
-  
-
-
-
-
-
-
-<link href="/vendors/font-awesome/css/font-awesome.min.css?v=4.4.0" rel="stylesheet" type="text/css" />
-
-<link href="/css/main.css?v=5.0.1" rel="stylesheet" type="text/css" />
-
-
-  <meta name="keywords" content="Android," />
-
-
-
-
-
-
-
-
-  <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico?v=5.0.1" />
-
-
-
-
-
-
-<meta name="description" content="Drawable&amp;#x7B80;&amp;#x4ECB;
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>Android Drawable源码分析和自定义 | DCQ HOME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="Drawable&amp;#x7B80;&amp;#x4ECB;
 Drawable&amp;#x7C7B;&amp;#x4F3C;&amp;#x4E8E;View&amp;#xFF0C;&amp;#x5B83;&amp;#x80FD;&amp;#x591F;&amp;#x5728;Canvas &amp;#x4E0A;&amp;#x7ED8;&amp;#x5236;&amp;#x4EFB;&amp;#x4F55;&amp;#x4F60;&amp;#x60F3;&amp;#x7ED8;&amp;#x5236;&amp;#x7684;&amp;#x4E1C;&amp;#x8">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Android Drawable源码分析和自定义">
@@ -102,202 +26,143 @@ Drawable&amp;#x7C7B;&amp;#x4F3C;&amp;#x4E8E;View&amp;#xFF0C;&amp;#x5B83;&amp;#x8
 <meta name="twitter:description" content="Drawable&amp;#x7B80;&amp;#x4ECB;
 Drawable&amp;#x7C7B;&amp;#x4F3C;&amp;#x4E8E;View&amp;#xFF0C;&amp;#x5B83;&amp;#x80FD;&amp;#x591F;&amp;#x5728;Canvas &amp;#x4E0A;&amp;#x7ED8;&amp;#x5236;&amp;#x4EFB;&amp;#x4F55;&amp;#x4F60;&amp;#x60F3;&amp;#x7ED8;&amp;#x5236;&amp;#x7684;&amp;#x4E1C;&amp;#x8">
 <meta name="twitter:image" content="http://yoursite.com/2016/07/23/Android-Drawable的分析和自定义/2016/07/23/Android-Drawable的分析和自定义/drawable_extends.png">
+  
+    <link rel="alternative" href="/atom.xml" title="DCQ HOME" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/assets/img/favicon.ico">
+  
+  <link rel="stylesheet" href="/main.css">
+  
 
-
-
-<script type="text/javascript" id="hexo.configuration">
-  var NexT = window.NexT || {};
-  var CONFIG = {
-    scheme: 'Mist',
-    sidebar: {"position":"left","display":"post"},
-    fancybox: true,
-    motion: true,
-    duoshuo: {
-      userId: 0,
-      author: '博主'
-    }
-  };
-</script>
-
-  <title> Android Drawable源码分析和自定义 | DCQ HOME </title>
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/assets/blogImg/litten.png" class="js-avatar">
+			
+		</a>
 
-  
+		<hgroup>
+		  <h1 class="header-author"><a href="/">dingchangqing</a></h1>
+		</hgroup>
 
+		
+		<p class="header-subtitle">不积跬步，无以至千里</p>
+		
 
-
-
-
-
-
-
-
-
-  
-  
-    
-  
-
-  <div class="container one-collumn sidebar-position-left page-post-detail ">
-    <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
-      <div class="header-inner"><div class="site-meta ">
-  
-
-  <div class="custom-logo-site-title">
-    <a href="/"  class="brand" rel="start">
-      <span class="logo-line-before"><i></i></span>
-      <span class="site-title">DCQ HOME</span>
-      <span class="logo-line-after"><i></i></span>
-    </a>
-  </div>
-  <p class="site-subtitle">不积跬步，无以至千里</p>
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/photos">相册</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="2" href="javascript:void(0)">关于我</a>
+    			
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/litten" title="github">github</a>
+		        
+					<a class="weibo" target="_blank" href="http://weibo.com/litten225" title="weibo">weibo</a>
+		        
+					<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+		        
+			</div>
+		</nav>
+	</header>		
 </div>
 
-<div class="site-nav-toggle">
-  <button>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-    <span class="btn-bar"></span>
-  </button>
-</div>
-
-<nav class="site-nav">
-  
-
-  
-    <ul id="menu" class="menu">
-      
-        
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
-            
-            首页
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-archives">
-          <a href="/archives" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
-            
-            归档
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-categories">
-          <a href="/categories" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
-            
-            分类
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-tags">
-          <a href="/tags" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
-            
-            标签
-          </a>
-        </li>
-      
-        
-        <li class="menu-item menu-item-about">
-          <a href="/about" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
-            
-            关于
-          </a>
-        </li>
-      
-
-      
-    </ul>
-  
-
-  
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">dingchangqing</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/assets/blogImg/litten.png" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">dingchangqing</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">不积跬步，无以至千里</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/photos">相册</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/litten" title="github">github</a>
+			        
+						<a class="weibo" target="_blank" href="http://weibo.com/litten225" title="weibo">weibo</a>
+			        
+						<a class="rss" target="_blank" href="/atom.xml" title="rss">rss</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
 </nav>
 
- </div>
-    </header>
-
-    <main id="main" class="main">
-      <div class="main-inner">
-        <div class="content-wrap">
-          <div id="content" class="content">
-            
-
-  <div id="posts" class="posts-expand">
+      <div class="body-wrap">
+        <article id="post-Android-Drawable的分析和自定义" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
     
-
-  
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal " itemscope itemtype="http://schema.org/Article">
-
+      <input type="hidden" class="isFancy" />
     
-      <header class="post-header">
-
+    
+      <header class="article-header">
         
-        
-          <h1 class="post-title" itemprop="name headline">
-            
-            
-              
-                Android Drawable源码分析和自定义
-              
-            
-          </h1>
-        
+  
+    <h1 class="article-title" itemprop="name">
+      Android Drawable源码分析和自定义
+    </h1>
+  
 
-        <div class="post-meta">
-          <span class="post-time">
-            <span class="post-meta-item-icon">
-              <i class="fa fa-calendar-o"></i>
-            </span>
-            <span class="post-meta-item-text">发表于</span>
-            <time itemprop="dateCreated" datetime="2016-07-23T16:57:41+08:00" content="2016-07-23">
-              2016-07-23
-            </time>
-          </span>
-
-          
-
-          
-            
-          
-
-          
-
-          
-          
-
-          
-        </div>
       </header>
     
-
-
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
+    <div class="article-entry" itemprop="articleBody">
       
         <h3 id="Drawable&#x7B80;&#x4ECB;"><a href="#Drawable&#x7B80;&#x4ECB;" class="headerlink" title="Drawable&#x7B80;&#x4ECB;"></a>Drawable&#x7B80;&#x4ECB;</h3><blockquote>
 <p>Drawable&#x7C7B;&#x4F3C;&#x4E8E;View&#xFF0C;&#x5B83;&#x80FD;&#x591F;&#x5728;<code>Canvas</code> &#x4E0A;&#x7ED8;&#x5236;&#x4EFB;&#x4F55;&#x4F60;&#x60F3;&#x7ED8;&#x5236;&#x7684;&#x4E1C;&#x897F;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x6BD4;View&#x66F4;&#x52A0;&#x7B80;&#x5355;&#xFF0C;&#x5B83;&#x4E0D;&#x7528;&#x53BB;&#x8003;&#x8651;<code>measure</code>&#x3001;<code>layout</code> &#x7B49;&#x8FC7;&#x7A0B;&#xFF0C;&#x5B83;&#x4E0D;&#x80FD;&#x4E0E;&#x7528;&#x6237;&#x4EA4;&#x4E92;&#x4E0D;&#x80FD;&#x5904;&#x7406;&#x89E6;&#x6478;&#x4E8B;&#x4EF6;&#xFF0C;&#x5B83;&#x53EA;&#x9700;&#x8981;&#x53BB;&#x8003;&#x8651;&#x5982;&#x4F55;&#x53BB;<code>draw</code>&#x5C31;&#x884C;&#x4E86;&#x3002;Drawable&#x662F;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x7C7B;&#xFF0C;&#x5728;&#x65E5;&#x5E38;&#x5F00;&#x53D1;&#x4E2D;&#x6211;&#x4EEC;&#x5927;&#x591A;&#x60C5;&#x51B5;&#x4E0B;&#x5E76;&#x4E0D;&#x662F;&#x76F4;&#x63A5;&#x4F7F;&#x7528;Drawable&#xFF0C;&#x6211;&#x4EEC;&#x7528;&#x7684;&#x66F4;&#x591A;&#x7684;&#x662F;&#x5728;<code>xml&#x6807;&#x7B7E;</code> &#xFF0C;&#x6BD4;&#x5982;<code>selector</code>&#x3001;<code>shape</code>&#x3001;<code>layer-list</code>&#x7B49;&#x7B49;&#xFF0C;&#x8FD9;&#x4E9B;<code>xml&#x6807;&#x7B7E;</code> &#x5E76;&#x4E0D;&#x662F;&#x5355;&#x72EC;&#x5B58;&#x5728;&#x7684;&#xFF0C;&#x5B83;&#x4EEC;&#x6BCF;&#x4E00;&#x4E2A;&#x90FD;&#x5BF9;&#x5E94;&#x7740;&#x4E00;&#x4E2A;Drawable&#x7684;&#x5B9E;&#x73B0;&#x7C7B;&#x3002;</p>
@@ -462,277 +327,232 @@ Drawable&amp;#x7C7B;&amp;#x4F3C;&amp;#x4E8E;View&amp;#xFF0C;&amp;#x5B83;&amp;#x8
 
       
     </div>
-
-    <div>
+    <div class="article-info article-info-index">
       
-        
+      <a href="/2016/07/23/Android-Drawable的分析和自定义/" class="archive-article-date">
+  	<time datetime="2016-07-23T08:57:41.000Z" itemprop="datePublished"><i class="icon-clock"></i>2016-07-23</time>
+</a>
       
-    </div>
-
-    <div>
-      
-        
-
-      
-    </div>
-
-    <footer class="post-footer">
-      
-        <div class="post-tags">
-          
-            <a href="/tags/Android/" rel="tag">#Android</a>
-          
-        </div>
-      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	</div>
 
       
-        <div class="post-nav">
-          <div class="post-nav-next post-nav-item">
-            
-              <a href="/2016/07/22/Android通用的混淆配置/" rel="next" title="Android通用的混淆配置">
-                <i class="fa fa-chevron-left"></i> Android通用的混淆配置
-              </a>
-            
-          </div>
 
-          <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2016/08/13/IOS数据持久化/" rel="prev" title="IOS数据持久化">
-                IOS数据持久化 <i class="fa fa-chevron-right"></i>
-              </a>
-            
-          </div>
-        </div>
-      
-
-      
-      
-    </footer>
-  </article>
-
-
-
-    <div class="post-spread">
-      
+      <div class="clearfix"></div>
     </div>
   </div>
+</article>
 
-
-          </div>
-          
-
-
-          
-  <div class="comments" id="comments">
-    
-  </div>
-
-
-        </div>
-        
-          
   
-  <div class="sidebar-toggle">
-    <div class="sidebar-toggle-line-wrap">
-      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
-      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
-    </div>
-  </div>
-
-  <aside id="sidebar" class="sidebar">
-    <div class="sidebar-inner">
-
-      
-
-      
-        <ul class="sidebar-nav motion-element">
-          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap" >
-            文章目录
-          </li>
-          <li class="sidebar-nav-overview" data-target="site-overview">
-            站点概览
-          </li>
-        </ul>
-      
-
-      <section class="site-overview sidebar-panel ">
-        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
-          <img class="site-author-image" itemprop="image"
-               src="/images/icon.jpg"
-               alt="dingchangqing" />
-          <p class="site-author-name" itemprop="name">dingchangqing</p>
-          <p class="site-description motion-element" itemprop="description">学习的路上还是一步一个脚印的好！</p>
-        </div>
-        <nav class="site-state motion-element">
-          <div class="site-state-item site-state-posts">
-            <a href="/archives">
-              <span class="site-state-item-count">11</span>
-              <span class="site-state-item-name">日志</span>
-            </a>
-          </div>
-
-          
-
-          
-            <div class="site-state-item site-state-tags">
-              <a href="/tags">
-                <span class="site-state-item-count">3</span>
-                <span class="site-state-item-name">标签</span>
-              </a>
-            </div>
-          
-
-        </nav>
-
+<nav id="article-nav">
+  
+    <a href="/2016/08/13/IOS数据持久化/" id="article-nav-newer" class="article-nav-link-wrap">
+      <i class="icon-circle-left"></i>
+      <div class="article-nav-title">
         
-
-        <div class="links-of-author motion-element">
-          
-        </div>
-
-        
-        
-
-        
-        
-
-      </section>
-
-      
-        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
-          <div class="post-toc">
-            
-              
-            
-            
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Drawable简介"><span class="nav-number">1.</span> <span class="nav-text">Drawable简介</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#类结构图"><span class="nav-number">1.1.</span> <span class="nav-text">类结构图</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#XML和类的对应关系"><span class="nav-number">1.2.</span> <span class="nav-text">XML和类的对应关系</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#必须实现的方法"><span class="nav-number">2.</span> <span class="nav-text">必须实现的方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#draw-Canvas-canvas"><span class="nav-number">2.1.</span> <span class="nav-text">draw(Canvas canvas)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setAlpha-int-alpha"><span class="nav-number">2.2.</span> <span class="nav-text">setAlpha(int alpha)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setColorFilter-ColorFilter-colorFilter"><span class="nav-number">2.3.</span> <span class="nav-text">setColorFilter(ColorFilter colorFilter)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getOpacity"><span class="nav-number">2.4.</span> <span class="nav-text">getOpacity()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他常用方法"><span class="nav-number">3.</span> <span class="nav-text">其他常用方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setBounds"><span class="nav-number">3.1.</span> <span class="nav-text">setBounds()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#getIntrinsicWidth-和getIntrinsicHeight"><span class="nav-number">3.2.</span> <span class="nav-text">getIntrinsicWidth()和getIntrinsicHeight()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#invalidateSelf"><span class="nav-number">3.3.</span> <span class="nav-text">invalidateSelf()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#scheduleSelf"><span class="nav-number">3.4.</span> <span class="nav-text">scheduleSelf()</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#unscheduleSelf"><span class="nav-number">3.5.</span> <span class="nav-text">unscheduleSelf()</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Callback接口"><span class="nav-number">4.</span> <span class="nav-text">Callback接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义Drawable"><span class="nav-number">5.</span> <span class="nav-text">自定义Drawable</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#利用Callback和Animator实现动画调度"><span class="nav-number">5.1.</span> <span class="nav-text">利用Callback和Animator实现动画调度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Drawable实现圆角图片"><span class="nav-number">5.2.</span> <span class="nav-text">使用Drawable实现圆角图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用Drawable实现统一的占位图"><span class="nav-number">5.3.</span> <span class="nav-text">使用Drawable实现统一的占位图</span></a></li></ol></li></ol></div>
-            
-          </div>
-        </section>
-      
-
-    </div>
-  </aside>
-
-
+          IOS数据持久化
         
       </div>
-    </main>
-
-    <footer id="footer" class="footer">
-      <div class="footer-inner">
-        <div class="copyright" >
+    </a>
   
-  &copy; 
-  <span itemprop="copyrightYear">2016</span>
-  <span class="with-love">
-    <i class="fa fa-heart"></i>
-  </span>
-  <span class="author" itemprop="copyrightHolder">dingchangqing</span>
+  
+    <a href="/2016/07/22/Android通用的混淆配置/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Android通用的混淆配置</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
 </div>
 
-<div class="powered-by">
-  由 <a class="theme-link" href="http://hexo.io">Hexo</a> 强力驱动
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="Android-Drawable的分析和自定义" data-title="Android Drawable源码分析和自定义" data-url="http://yoursite.com/2016/07/23/Android-Drawable的分析和自定义/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"litten-hexo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
 </div>
 
-<div class="theme-info">
-  主题 -
-  <a class="theme-link" href="https://github.com/iissnan/hexo-theme-next">
-    NexT.Mist
-  </a>
-</div>
 
-        
 
-        
+
+
       </div>
-    </footer>
-
-    <div class="back-to-top">
-      <i class="fa fa-arrow-up"></i>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2016 dingchangqing
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
     </div>
   </div>
-
-  
-
-<script type="text/javascript">
-  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
-    window.Promise = null;
-  }
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true,
+		root: "/",
+		innerArchive: true
+	}
 </script>
 
+<script src="/./main.js"></script>
 
 
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+      <li data-hook="tools-section-me"><span class="text">我</span><i class="icon-smile"></i></li>
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
 
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/IOS/" style="font-size: 15px;">IOS</a> <a href="/tags/混淆/" style="font-size: 10px;">混淆</a>
+    			</div>
+    	</section>
+    
 
+    
 
-
-
-
+    
+    	<section class="tools-section tools-section-me">
+  	  	
+  	  		<div class="aboutme-wrap" id="js-aboutme">Litten，&lt;br&gt;毕业于华科，就职于鹅厂&lt;br&gt;&lt;br&gt;热爱大海与冷笑话，&lt;br/&gt;目前是一枚前端&lt;br/&gt;&lt;br/&gt;胆小认生，不易相处，&lt;br&gt;年轻无为，卖马为生。</div>
+  	  	
+    	</section>
+    
+  </div>
   
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
 
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
 
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
 
-  
-  <script type="text/javascript" src="/vendors/jquery/index.js?v=2.1.3"></script>
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
 
-  
-  <script type="text/javascript" src="/vendors/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
 
-  
-  <script type="text/javascript" src="/vendors/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+            <div class="pswp__top-bar">
 
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.min.js?v=1.2.1"></script>
+                <!--  Controls are self-explanatory. Order can be changed. -->
 
-  
-  <script type="text/javascript" src="/vendors/velocity/velocity.ui.min.js?v=1.2.1"></script>
+                <div class="pswp__counter"></div>
 
-  
-  <script type="text/javascript" src="/vendors/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
 
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
 
-  
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
 
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
 
-  <script type="text/javascript" src="/js/src/utils.js?v=5.0.1"></script>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
 
-  <script type="text/javascript" src="/js/src/motion.js?v=5.0.1"></script>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
 
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
 
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
 
-  
-  
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
 
-  
-  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.0.1"></script>
-<script type="text/javascript" src="/js/src/post-details.js?v=5.0.1"></script>
+        </div>
 
+    </div>
 
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.0.1"></script>
-
-
-
-  
-
-
-
-  
-
-
-
-  
-  
-  
-
-  
-
-  
-
+</div>
+  </div>
 </body>
 </html>
