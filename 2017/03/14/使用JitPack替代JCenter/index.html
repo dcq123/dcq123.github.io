@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>使用JitPack替代JCenter | DCQ HOME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="&amp;#x7531;&amp;#x4E8E;&amp;#x5728;&amp;#x4F7F;&amp;#x7528;bintray&amp;#x53D1;&amp;#x5E03;Library&amp;#x5230;JCenter&amp;#x65F6;&amp;#xFF0C;&amp;#x53EA;&amp;#x80FD;&amp;#x662F;&amp;#x4ED8;&amp;#x8D39;&amp;#x7528;&amp;#x6237;&amp;#x624D;&amp;#x80FD;&amp;#x8FDB;&amp;#x884C;&amp;#x53D1;&amp;#">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用JitPack替代JCenter">
+<meta property="og:url" content="http://yoursite.com/2017/03/14/使用JitPack替代JCenter/index.html">
+<meta property="og:site_name" content="DCQ HOME">
+<meta property="og:description" content="&amp;#x7531;&amp;#x4E8E;&amp;#x5728;&amp;#x4F7F;&amp;#x7528;bintray&amp;#x53D1;&amp;#x5E03;Library&amp;#x5230;JCenter&amp;#x65F6;&amp;#xFF0C;&amp;#x53EA;&amp;#x80FD;&amp;#x662F;&amp;#x4ED8;&amp;#x8D39;&amp;#x7528;&amp;#x6237;&amp;#x624D;&amp;#x80FD;&amp;#x8FDB;&amp;#x884C;&amp;#x53D1;&amp;#">
+<meta property="og:image" content="http://yoursite.com/2017/03/14/使用JitPack替代JCenter/jit-pack.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/14/使用JitPack替代JCenter/QQ20170314-0.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/14/使用JitPack替代JCenter/QQ20170314-1.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/14/使用JitPack替代JCenter/QQ20170314-2.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/14/使用JitPack替代JCenter/QQ20170314-4.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/14/使用JitPack替代JCenter/QQ20170314-5.png">
+<meta property="og:updated_time" content="2017-03-14T10:11:05.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="使用JitPack替代JCenter">
+<meta name="twitter:description" content="&amp;#x7531;&amp;#x4E8E;&amp;#x5728;&amp;#x4F7F;&amp;#x7528;bintray&amp;#x53D1;&amp;#x5E03;Library&amp;#x5230;JCenter&amp;#x65F6;&amp;#xFF0C;&amp;#x53EA;&amp;#x80FD;&amp;#x662F;&amp;#x4ED8;&amp;#x8D39;&amp;#x7528;&amp;#x6237;&amp;#x624D;&amp;#x80FD;&amp;#x8FDB;&amp;#x884C;&amp;#x53D1;&amp;#">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/14/使用JitPack替代JCenter/jit-pack.png">
+  
+    <link rel="alternative" href="/atom.xml" title="DCQ HOME" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/icon.jpg">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/images/icon.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">dingchangqing</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">不积跬步，无以至千里</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives">时间轴</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/dcq123" title="github">github</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">dingchangqing</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/images/icon.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">dingchangqing</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">不积跬步，无以至千里</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">时间轴</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dcq123" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-使用JitPack替代JCenter" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      使用JitPack替代JCenter
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>&#x7531;&#x4E8E;&#x5728;&#x4F7F;&#x7528;<code>bintray</code>&#x53D1;&#x5E03;<code>Library</code>&#x5230;<code>JCenter</code>&#x65F6;&#xFF0C;&#x53EA;&#x80FD;&#x662F;&#x4ED8;&#x8D39;&#x7528;&#x6237;&#x624D;&#x80FD;&#x8FDB;&#x884C;&#x53D1;&#x5E03;&#xFF0C;&#x672A;&#x4ED8;&#x8D39;&#x7684;&#x7528;&#x6237;&#x5728;&#x53D1;&#x5E03;&#x5230;<code>bintray</code>&#x6210;&#x529F;&#x540E;&#x8FDE;<code>add to Jcenter</code>&#x7684;&#x6309;&#x94AE;&#x90FD;&#x627E;&#x4E0D;&#x5230;&#xFF0C;&#x6240;&#x4EE5;&#x6211;&#x4EEC;&#x53EA;&#x80FD;&#x53E6;&#x5BFB;&#x65B9;&#x6848;&#xFF0C;&#x6BD5;&#x7ADF;&#x4F7F;&#x7528;gradle&#x76F4;&#x63A5;&#x6DFB;&#x52A0;&#x4F9D;&#x8D56;&#x7684;&#x65B9;&#x5F0F;&#x76F8;&#x5F53;&#x65B9;&#x4FBF;&#x3002;&#x7ECF;&#x8FC7;&#x641C;&#x7D22;&#xFF0C;&#x5728;&#x7F51;&#x4E0A;&#x627E;&#x5230;&#x4E86;&#x66FF;&#x4EE3;&#x65B9;&#x6848;&#xFF0C;&#x800C;&#x4E14;&#x64CD;&#x4F5C;&#x5341;&#x5206;&#x7B80;&#x5355;&#xFF0C;&#x5E76;&#x4E0D;&#x50CF;<code>bintray</code>&#x53D1;&#x5E03;&#x90A3;&#x6837;&#x9700;&#x8981;&#x7E41;&#x7410;&#x7684;&#x6A21;&#x677F;&#x914D;&#x7F6E;&#x3002;</p>
+</blockquote>
+<p><a href="https://jitpack.io/" target="_blank" rel="external">JitPack&#x5730;&#x5740;</a></p>
+<p><img src="/2017/03/14/&#x4F7F;&#x7528;JitPack&#x66FF;&#x4EE3;JCenter/jit-pack.png" alt="jit-pack"></p>
+<p>&#x6211;&#x4EEC;&#x53EA;&#x9700;&#x8981;&#x5728;JitPack&#x4E2D;&#x586B;&#x5199;git &#x4ED3;&#x5E93;&#x7684;<code>url</code>&#x5373;&#x53EF;&#xFF0C;&#x5B83;&#x4F1A;&#x53BB;&#x62C9;&#x53D6;github&#x4E0A;&#x9762;&#x53D1;&#x5E03;&#x7684;&#x4E0D;&#x540C;&#x7684;&#x7248;&#x672C;&#xFF0C;&#x4F9B;&#x6211;&#x4EEC;&#x9009;&#x62E9;&#x4E0D;&#x540C;&#x7248;&#x672C;&#x7684;&#x4F9D;&#x8D56;&#x3002;</p>
+<p>&#x4EE5;&#x4E0B;&#x5177;&#x4F53;&#x4ECB;&#x7ECD;&#x64CD;&#x4F5C;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<h4 id="&#x6DFB;&#x52A0;gradle&#x4F9D;&#x8D56;"><a href="#&#x6DFB;&#x52A0;gradle&#x4F9D;&#x8D56;" class="headerlink" title="&#x6DFB;&#x52A0;gradle&#x4F9D;&#x8D56;"></a>&#x6DFB;&#x52A0;gradle&#x4F9D;&#x8D56;</h4><p>&#x73B0;&#x5728;&#x9879;&#x76EE;&#x7684;<code>root</code> <code>bulid.gralde</code>&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;&#x4EE5;&#x4E0B;&#x4F9D;&#x8D56;&#xFF1A;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div></pre></td><td class="code"><pre><div class="line">classpath &apos;com.github.dcendents:android-maven-gradle-plugin:1.4.1&apos;</div></pre></td></tr></table></figure>
+<p>&#x7136;&#x540E;&#x5728;&#x63D0;&#x4F9B;&#x7684;<code>Library</code>&#x4E2D;&#x6DFB;&#x52A0;&#x5982;&#x4E0B;&#x4F9D;&#x8D56;:</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div></pre></td><td class="code"><pre><div class="line">apply plugin: &apos;com.android.library&apos;</div><div class="line"></div><div class="line">apply plugin: &apos;com.github.dcendents.android-maven&apos;</div><div class="line">group=&apos;com.github.xxxx&apos;</div><div class="line">// xxxx&#x4EE3;&#x529E;&#x4F60;&#x7684;github&#x8D26;&#x53F7;&#x540D;</div></pre></td></tr></table></figure>
+<p>&#x7136;&#x540E;&#x5C31;&#x53EF;&#x4EE5;&#x63D0;&#x4EA4;&#x4FEE;&#x6539;&#x5230;github&#x4E0A;&#x3002;</p>
+<h4 id="&#x6784;&#x5EFA;Release&#x7248;&#x672C;"><a href="#&#x6784;&#x5EFA;Release&#x7248;&#x672C;" class="headerlink" title="&#x6784;&#x5EFA;Release&#x7248;&#x672C;"></a>&#x6784;&#x5EFA;Release&#x7248;&#x672C;</h4><p>&#x8FDB;&#x5165;github&#x4E0A;&#x5BF9;&#x5E94;&#x7684;&#x9879;&#x76EE;&#xFF0C;&#x521B;&#x5EFA;<code>release</code>&#x7248;&#x672C;&#xFF1A;</p>
+<p><img src="/2017/03/14/&#x4F7F;&#x7528;JitPack&#x66FF;&#x4EE3;JCenter/QQ20170314-0.png" alt="QQ20170314-0"></p>
+<p><img src="/2017/03/14/&#x4F7F;&#x7528;JitPack&#x66FF;&#x4EE3;JCenter/QQ20170314-1.png" alt="QQ20170314-1"></p>
+<p><img src="/2017/03/14/&#x4F7F;&#x7528;JitPack&#x66FF;&#x4EE3;JCenter/QQ20170314-2.png" alt="QQ20170314-2"></p>
+<p>&#x6309;&#x7167;&#x4E0A;&#x9762;&#x7684;&#x6B65;&#x9AA4;&#xFF0C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x6700;&#x65B0;&#x7684;<code>release</code>&#x7248;&#x672C;&#x3002;</p>
+<h4 id="JitPack&#x751F;&#x6210;&#x4F9D;&#x8D56;&#x8DEF;&#x52B2;"><a href="#JitPack&#x751F;&#x6210;&#x4F9D;&#x8D56;&#x8DEF;&#x52B2;" class="headerlink" title="JitPack&#x751F;&#x6210;&#x4F9D;&#x8D56;&#x8DEF;&#x52B2;"></a>JitPack&#x751F;&#x6210;&#x4F9D;&#x8D56;&#x8DEF;&#x52B2;</h4><p>&#x5728;&#x521B;&#x5EFA;&#x4E86;&#x6700;&#x65B0;&#x7684;release&#x7248;&#x672C;&#x540E;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5230;JitPack&#x4E2D;&#x751F;&#x6210;&#x4F9D;&#x8D56;&#x8DEF;&#x5F84;&#x4E86;&#xFF0C;&#x5177;&#x4F53;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<p>&#x5C06;&#x9879;&#x76EE;&#x5730;&#x5740;&#x653E;&#x5165;&#x641C;&#x7D22;&#x680F;&#x4E2D;</p>
+<p><img src="/2017/03/14/&#x4F7F;&#x7528;JitPack&#x66FF;&#x4EE3;JCenter/QQ20170314-4.png" alt="QQ20170314-4"></p>
+<p>&#x70B9;&#x51FB;&#x540E;&#x4F1A;&#x62C9;&#x53D6;&#x5230;&#x5404;&#x4E2A;&#x7248;&#x672C;&#xFF0C;&#x7136;&#x540E;<code>Get it</code>&#x5373;&#x53EF;&#x751F;&#x6210;&#x4E0B;&#x9762;&#x7684;&#x4F9D;&#x8D56;&#x8DEF;&#x5F84;&#xFF1A;</p>
+<p><img src="/2017/03/14/&#x4F7F;&#x7528;JitPack&#x66FF;&#x4EE3;JCenter/QQ20170314-5.png" alt="QQ20170314-5"></p>
+<p>&#x73B0;&#x5728;&#x5C31;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5728;&#x9879;&#x76EE;&#x4E2D;&#x5F15;&#x5165;&#x8FD9;&#x4E2A;&#x4F9D;&#x8D56;&#x4E86;&#x3002;</p>
+<p>&#x4E0D;&#x5F97;&#x4E0D;&#x8BF4;&#xFF0C;&#x76F8;&#x5F53;&#x7B80;&#x5355;&#xFF0C;&#x800C;&#x4E14;&#x7279;&#x522B;&#x4FBF;&#x5229;&#xFF0C;&#x6700;&#x4E3B;&#x8981;&#x662F;&#x4E0D;&#x6536;&#x8D39; &#xFF1A;)</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/03/14/使用JitPack替代JCenter/" class="archive-article-date">
+  	<time datetime="2017-03-14T09:43:31.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-14</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/13/adb常用命令总结/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">adb常用命令总结</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="使用JitPack替代JCenter" data-title="使用JitPack替代JCenter" data-url="http://yoursite.com/2017/03/14/使用JitPack替代JCenter/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"litten-hexo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 dingchangqing
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/IOS/" style="font-size: 15px;">IOS</a> <a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a> <a href="/tags/混淆/" style="font-size: 10px;">混淆</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
