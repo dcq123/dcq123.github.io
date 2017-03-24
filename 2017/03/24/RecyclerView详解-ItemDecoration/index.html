@@ -1,0 +1,411 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" >
+  <link rel="dns-prefetch" href="http://yoursite.com">
+  <title>RecyclerView详解--ItemDecoration | DCQ HOME</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="RecyclerView(RV)&amp;#x76F8;&amp;#x5BF9;&amp;#x539F;&amp;#x6765;&amp;#x7684;ListView&amp;#x63D0;&amp;#x4F9B;&amp;#x4E86;&amp;#x66F4;&amp;#x597D;&amp;#x7684;&amp;#x7F13;&amp;#x5B58;&amp;#x673A;&amp;#x5236;&amp;#xFF0C;&amp;#x5C06;&amp;#x5E03;&amp;#x5C40;&amp;#x7BA1;&amp;#x7406;&amp;#x62C6">
+<meta property="og:type" content="article">
+<meta property="og:title" content="RecyclerView详解--ItemDecoration">
+<meta property="og:url" content="http://yoursite.com/2017/03/24/RecyclerView详解-ItemDecoration/index.html">
+<meta property="og:site_name" content="DCQ HOME">
+<meta property="og:description" content="RecyclerView(RV)&amp;#x76F8;&amp;#x5BF9;&amp;#x539F;&amp;#x6765;&amp;#x7684;ListView&amp;#x63D0;&amp;#x4F9B;&amp;#x4E86;&amp;#x66F4;&amp;#x597D;&amp;#x7684;&amp;#x7F13;&amp;#x5B58;&amp;#x673A;&amp;#x5236;&amp;#xFF0C;&amp;#x5C06;&amp;#x5E03;&amp;#x5C40;&amp;#x7BA1;&amp;#x7406;&amp;#x62C6">
+<meta property="og:image" content="http://yoursite.com/2017/03/24/RecyclerView详解-ItemDecoration/QQ20170324-140302.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/24/RecyclerView详解-ItemDecoration/QQ20170324-141236.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/24/RecyclerView详解-ItemDecoration/QQ20170322-5.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/24/RecyclerView详解-ItemDecoration/QQ20170322-0.png">
+<meta property="og:image" content="http://yoursite.com/2017/03/24/RecyclerView详解-ItemDecoration/QQ20170323-1.png">
+<meta property="og:updated_time" content="2017-03-24T07:56:00.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="RecyclerView详解--ItemDecoration">
+<meta name="twitter:description" content="RecyclerView(RV)&amp;#x76F8;&amp;#x5BF9;&amp;#x539F;&amp;#x6765;&amp;#x7684;ListView&amp;#x63D0;&amp;#x4F9B;&amp;#x4E86;&amp;#x66F4;&amp;#x597D;&amp;#x7684;&amp;#x7F13;&amp;#x5B58;&amp;#x673A;&amp;#x5236;&amp;#xFF0C;&amp;#x5C06;&amp;#x5E03;&amp;#x5C40;&amp;#x7BA1;&amp;#x7406;&amp;#x62C6">
+<meta name="twitter:image" content="http://yoursite.com/2017/03/24/RecyclerView详解-ItemDecoration/QQ20170324-140302.png">
+  
+    <link rel="alternative" href="/atom.xml" title="DCQ HOME" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/images/icon.jpg">
+  
+  <link rel="stylesheet" href="/main.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div class="left-col">
+      <div class="overlay"></div>
+<div class="intrude-less">
+	<header id="header" class="inner">
+		<a href="/" class="profilepic">
+			
+			<img src="/images/icon.jpg" class="js-avatar">
+			
+		</a>
+
+		<hgroup>
+		  <h1 class="header-author"><a href="/">dingchangqing</a></h1>
+		</hgroup>
+
+		
+		<p class="header-subtitle">不积跬步，无以至千里</p>
+		
+
+		<nav class="header-menu">
+			<ul>
+			
+				<li><a href="/">主页</a></li>
+	        
+				<li><a href="/archives">时间轴</a></li>
+	        
+			</ul>
+		</nav>
+		<nav class="header-smart-menu">
+	        
+    		
+    			
+    			<a class="js-smart-menu" data-idx="0" href="javascript:void(0)">所有文章</a>
+    			
+    			
+            
+    			
+    			<a class="js-smart-menu" data-idx="1" href="javascript:void(0)">标签</a>
+    			
+    			
+            
+    			
+            
+		</nav>
+		<nav class="header-nav">
+			<div class="social">
+				
+					<a class="github" target="_blank" href="https://github.com/dcq123" title="github">github</a>
+		        
+			</div>
+		</nav>
+	</header>		
+</div>
+
+    </div>
+    <div class="mid-col">
+      <nav id="mobile-nav">
+  	<div class="overlay">
+  		<div class="slider-trigger"><i class="icon-list"></i></div>
+  		<h1 class="header-author js-mobile-header hide">dingchangqing</h1>
+  	</div>
+	<div class="intrude-less">
+		<header id="header" class="inner">
+			<div class="profilepic">
+				
+					<img src="/images/icon.jpg" class="js-avatar">
+				
+			</div>
+			<hgroup>
+			  <h1 class="header-author">dingchangqing</h1>
+			</hgroup>
+			
+			<p class="header-subtitle">不积跬步，无以至千里</p>
+			
+			<nav class="header-menu">
+				<ul>
+				
+					<li><a href="/">主页</a></li>
+		        
+					<li><a href="/archives">时间轴</a></li>
+		        
+				</ul>
+			</nav>
+			<nav class="header-nav">
+				<div class="social">
+					
+						<a class="github" target="_blank" href="https://github.com/dcq123" title="github">github</a>
+			        
+				</div>
+			</nav>
+		</header>				
+	</div>
+</nav>
+
+      <div class="body-wrap">
+        <article id="post-RecyclerView详解-ItemDecoration" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      RecyclerView详解--ItemDecoration
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p><code>RecyclerView</code>(RV)&#x76F8;&#x5BF9;&#x539F;&#x6765;&#x7684;<code>ListView</code>&#x63D0;&#x4F9B;&#x4E86;&#x66F4;&#x597D;&#x7684;&#x7F13;&#x5B58;&#x673A;&#x5236;&#xFF0C;&#x5C06;&#x5E03;&#x5C40;&#x7BA1;&#x7406;&#x62C6;&#x5206;&#x5230;<code>LayoutManager</code>&#x4E2D;&#x4F7F;&#x6269;&#x5C55;&#x66F4;&#x52A0;&#x65B9;&#x4FBF;&#xFF0C;&#x540C;&#x65F6;<code>Google</code>&#x63D0;&#x4F9B;&#x4E86;&#x9488;&#x5BF9;<code>Linear</code>&#x3001;<code>Grid</code>&#x3001;<code>StaggeredGrid</code>&#x4E0D;&#x540C;&#x5E03;&#x5C40;&#x9700;&#x6C42;&#x7684;&#x5B9E;&#x73B0;&#xFF0C;&#x4F7F;&#x6211;&#x4EEC;&#x5BF9;&#x4E8E;&#x5217;&#x8868;&#x5E03;&#x5C40;&#x7684;&#x4F7F;&#x7528;&#x66F4;&#x52A0;&#x4FBF;&#x6377;&#xFF0C;<code>Adapter</code>&#x4E2D;&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x9488;&#x5BF9;<code>ViewHolder</code>&#x7684;&#x62BD;&#x53D6;&#x548C;&#x5C01;&#x88C5;&#xFF0C;&#x4E5F;&#x63D0;&#x4F9B;&#x4E86;&#x9488;&#x5BF9;<code>item</code>&#x7684;&#x52A8;&#x753B;&#x3001;&#x88C5;&#x9970;&#x7B49;&#x7279;&#x6027;&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x7684;&#x51E0;&#x7BC7;&#x6587;&#x7AE0;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x4E00;&#x4E00;&#x5BF9;<code>RecyclerView</code>&#x8FDB;&#x884C;&#x5206;&#x6790;&#x3002;</p>
+</blockquote>
+<p>RecyclerView&#x7684;&#x7C7B;&#x7ED3;&#x6784;&#x56FE;&#xFF1A;</p>
+<p><img src="/2017/03/24/RecyclerView&#x8BE6;&#x89E3;-ItemDecoration/QQ20170324-140302.png" alt="QQ20170324-140302"></p>
+<p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x7ED3;&#x6784;&#x56FE;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x5927;&#x90E8;&#x5206;&#x5B9E;&#x73B0;&#x7C7B;&#x90FD;&#x5B9A;&#x4E49;&#x5728;<code>RV</code>&#x4E2D;&#x4EE5;&#x5185;&#x90E8;&#x7C7B;&#x5B58;&#x5728;&#x3002;&#x6211;&#x4EEC;&#x5E73;&#x65F6;&#x5F00;&#x53D1;&#x6BD4;&#x8F83;&#x5E38;&#x7528;&#x7684;<code>Adapter</code>&#x3001;<code>ViewHolder</code>&#x3001;<code>LayoutManager</code>&#x3001;<code>ItemDecoration</code>&#x3001;<code>ItemAnimator</code>&#x7B49;&#xFF0C;&#x8FD9;&#x4E9B;&#x662F;&#x6211;&#x4EEC;&#x5E73;&#x65F6;&#x4F7F;&#x7528;<code>RV</code>&#x65F6;&#x7528;&#x7684;&#x6700;&#x591A;&#x7684;&#x3002;&#x4ECA;&#x5929;&#x6211;&#x4EEC;&#x5C31;&#x4ECE;&#x4E00;&#x4E2A;&#x6700;&#x7B80;&#x5355;&#x7684;&#x5165;&#x624B;&#x6765;&#x5206;&#x6790;<code>RecyclerView</code>&#x2014;<code>ItemDecoration</code>&#x3002;</p>
+<h4 id="ItemDecoration&#x7B80;&#x4ECB;"><a href="#ItemDecoration&#x7B80;&#x4ECB;" class="headerlink" title="ItemDecoration&#x7B80;&#x4ECB;"></a>ItemDecoration&#x7B80;&#x4ECB;</h4><blockquote>
+<p><code>ItemDecoration</code>&#x662F;item&#x7684;&#x88C5;&#x9970;&#x5668;&#xFF0C;&#x5E73;&#x5E38;&#x7684;&#x5F00;&#x53D1;&#x4E2D;&#xFF0C;&#x6211;&#x4EEC;&#x66F4;&#x591A;&#x662F;&#x4F7F;&#x7528;&#x5B83;&#x53BB;&#x7ED8;&#x5236;&#x4E00;&#x6761;&#x5206;&#x9694;&#x7EBF;&#xFF0C;&#x6216;&#x8005;&#x7ED8;&#x5236;item&#x4E4B;&#x95F4;&#x7684;&#x95F4;&#x9694;&#xFF0C;&#x5F53;&#x7136;&#xFF0C;&#x8FD9;&#x4E9B;&#x662F;&#x6700;&#x7B80;&#x5355;&#x7684;&#x4F7F;&#x7528;&#x65B9;&#x5F0F;&#xFF0C;&#x65E2;&#x7136;&#x662F;&#x88C5;&#x9970;&#x5668;&#xFF0C;&#x6211;&#x4EEC;&#x5C31;&#x53EF;&#x4EE5;&#x5728;&#x6BCF;&#x4E2A;Item&#x4E0A;&#x8FDB;&#x884C;&#x4E0D;&#x540C;&#x7684;&#x88C5;&#x9970;&#x64CD;&#x4F5C;&#xFF0C;&#x6709;&#x4E86;&#x5B83;&#x6211;&#x4EEC;&#x5728;&#x5F00;&#x53D1;&#x65F6;&#x5C31;&#x53EF;&#x4EE5;&#x591A;&#x4E00;&#x4E2A;&#x89D2;&#x5EA6;&#x53BB;&#x8003;&#x8651;&#x4E00;&#x4E9B;&#x5B9E;&#x73B0;&#xFF0C;&#x6BD4;&#x5982;&#x540E;&#x9762;&#x7684;&#x793A;&#x4F8B;&#xFF1A;&#x4F7F;&#x7528;Decoration&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x7269;&#x6D41;&#x8BE6;&#x60C5;&#x754C;&#x9762;&#x3002;</p>
+</blockquote>
+<h4 id="ItemDecoration&#x7C7B;&#x7ED3;&#x6784;"><a href="#ItemDecoration&#x7C7B;&#x7ED3;&#x6784;" class="headerlink" title="ItemDecoration&#x7C7B;&#x7ED3;&#x6784;"></a>ItemDecoration&#x7C7B;&#x7ED3;&#x6784;</h4><p><img src="/2017/03/24/RecyclerView&#x8BE6;&#x89E3;-ItemDecoration/QQ20170324-141236.png" alt="QQ20170324-141236"></p>
+<p>&#x4E3B;&#x8981;&#x5B9A;&#x4E49;&#x4E86;3&#x4E2A;&#x65B9;&#x6CD5;&#xFF0C;<code>onDraw()</code>&#x3001;<code>onDrawOver()</code>&#x3001;<code>getItemOffsets()</code>&#x8FD9;&#x51E0;&#x4E2A;&#x65B9;&#x6CD5;&#x57FA;&#x672C;&#x4E0A;&#x90FD;&#x662F;&#x7A7A;&#x5B9E;&#x73B0;&#xFF0C;&#x8BA9;&#x6211;&#x4EEC;&#x4E00;&#x4E00;&#x5BF9;&#x8FD9;&#x4E9B;&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x89E3;&#x6790;&#xFF1A;</p>
+<p>&#x5148;&#x770B;&#x4E00;&#x4E0B;&#x6DFB;&#x52A0;<code>ItemDecoration</code>&#x7684;&#x5165;&#x53E3;&#xFF0C;<code>addItemDecoration(ItemDecoration decor)</code>&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">final</span> ArrayList&lt;ItemDecoration&gt; mItemDecorations = <span class="keyword">new</span> ArrayList&lt;&gt;();</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addItemDecoration</span><span class="params">(ItemDecoration decor)</span> </span>{</div><div class="line">  addItemDecoration(decor, -<span class="number">1</span>);</div><div class="line">}</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addItemDecoration</span><span class="params">(ItemDecoration decor, <span class="keyword">int</span> index)</span> </span>{</div><div class="line">  <span class="keyword">if</span> (mLayout != <span class="keyword">null</span>) {</div><div class="line">    mLayout.assertNotInLayoutOrScroll(<span class="string">&quot;Cannot add item decoration during a scroll  or&quot;</span></div><div class="line">                                      + <span class="string">&quot; layout&quot;</span>);</div><div class="line">  }</div><div class="line">  <span class="keyword">if</span> (mItemDecorations.isEmpty()) {</div><div class="line">    setWillNotDraw(<span class="keyword">false</span>);</div><div class="line">  }</div><div class="line">  <span class="keyword">if</span> (index &lt; <span class="number">0</span>) {</div><div class="line">    mItemDecorations.add(decor);</div><div class="line">  } <span class="keyword">else</span> {</div><div class="line">    mItemDecorations.add(index, decor);</div><div class="line">  }</div><div class="line">  markItemDecorInsetsDirty();</div><div class="line">  requestLayout();</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x8C03;&#x7528;&#x8BE5;&#x65B9;&#x6CD5;&#x6700;&#x7EC8;&#x628A;&#x5B9A;&#x4E49;&#x7684;<code>decor</code>&#x90FD;&#x653E;&#x5728;&#x4E86;<code>RV</code>&#x5185;&#x90E8;&#x7684;&#x96C6;&#x5408;&#x53D8;&#x91CF;<code>mItemDecorations</code>&#x4E2D;&#xFF0C;&#x7531;&#x8FD9;&#x70B9;&#x4E5F;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x6211;&#x4EEC;&#x5E76;&#x4E0D;&#x662F;&#x53EA;&#x80FD;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;<code>decor</code>&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;&#x591A;&#x4E2A;&#x4E0D;&#x540C;&#x7684;<code>decor</code>&#xFF0C;&#x5B83;&#x4EEC;&#x6700;&#x7EC8;&#x90FD;&#x4F1A;&#x88C5;&#x9970;&#x5230;<code>RV</code>&#x7684;<code>item</code>&#x4E0A;&#x3002;&#x7EE7;&#x7EED;&#x8DDF;&#x8E2A;<code>decor</code>&#x4E2D;3&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#x4F4D;&#x7F6E;&#x3002;</p>
+<h5 id="onDraw-Canvas-c-RecyclerView-parent-State-state"><a href="#onDraw-Canvas-c-RecyclerView-parent-State-state" class="headerlink" title="onDraw(Canvas c, RecyclerView parent, State state)"></a>onDraw(Canvas c, RecyclerView parent, State state)</h5><p>&#x770B;&#x540D;&#x79F0;&#x5C31;&#x77E5;&#x9053;&#x8FD9;&#x4E2A;&#x80AF;&#x5B9A;&#x662F;&#x8BA9;&#x6211;&#x4EEC;&#x7528;&#x6765;&#x7ED8;&#x5236;&#x5177;&#x4F53;&#x7684;&#x88C5;&#x9970;&#x7684;&#xFF0C;&#x4F20;&#x9012;&#x4E86;<code>Canvas</code>&#x8FDB;&#x6765;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x7ED8;&#x5236;&#x4E00;&#x5207;&#x5728;&#x753B;&#x5E03;&#x4E0A;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x5C06;<code>RV</code>&#x81EA;&#x8EAB;&#x4F20;&#x9012;&#x8FDB;&#x6765;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x5728;<code>RV</code>&#x7684;<code>onDraw()</code>&#x4E2D;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas c)</span> </span>{</div><div class="line">  <span class="keyword">super</span>.onDraw(c);</div><div class="line"></div><div class="line">  <span class="comment">// &#x904D;&#x5386;&#x6240;&#x6709;&#x7684;decor&#xFF0C;&#x5E76;&#x8C03;&#x7528;onDraw&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x7ED8;&#x5236;</span></div><div class="line">  <span class="keyword">final</span> <span class="keyword">int</span> count = mItemDecorations.size();</div><div class="line">  <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) {</div><div class="line">    mItemDecorations.get(i).onDraw(c, <span class="keyword">this</span>, mState);</div><div class="line">  }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h5 id="onDrawOver-Canvas-c-RecyclerView-parent-State-state"><a href="#onDrawOver-Canvas-c-RecyclerView-parent-State-state" class="headerlink" title="onDrawOver(Canvas c, RecyclerView parent, State state)"></a>onDrawOver(Canvas c, RecyclerView parent, State state)</h5><p>&#x8BE5;&#x65B9;&#x6CD5;&#x4E5F;&#x662F;&#x7528;&#x6765;&#x7ED8;&#x5236;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x5B83;&#x7ED8;&#x5236;&#x7684;&#x88C5;&#x9970;&#x7269;&#xFF0C;&#x6700;&#x7EC8;&#x662F;&#x663E;&#x793A;&#x5728;<code>ItemView</code>&#x4E4B;&#x4E0A;&#x7684;&#xFF0C;&#x8FD9;&#x5C31;&#x662F;<code>over</code>&#x7684;&#x542B;&#x4E49;&#x3002;&#x8BE5;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x5728;<code>RV</code>&#x7684;<code>draw()</code>&#x65B9;&#x6CD5;&#x4E2D;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div></pre></td><td class="code"><pre><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">draw</span><span class="params">(Canvas c)</span> </span>{</div><div class="line">    <span class="keyword">super</span>.draw(c);</div><div class="line"></div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> count = mItemDecorations.size();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) {</div><div class="line">        mItemDecorations.get(i).onDrawOver(c, <span class="keyword">this</span>, mState);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<h5 id="getItemOffsets-Rect-outRect-View-view-RecyclerView-parent-State-state"><a href="#getItemOffsets-Rect-outRect-View-view-RecyclerView-parent-State-state" class="headerlink" title="getItemOffsets(Rect outRect, View view, RecyclerView parent, State state)"></a>getItemOffsets(Rect outRect, View view, RecyclerView parent, State state)</h5><p>&#x8BE5;&#x65B9;&#x6CD5;&#x6700;&#x7EC8;&#x7684;&#x542B;&#x4E49;&#x662F;&#x4E3A;<code>ItemView</code>&#x6DFB;&#x52A0;&#x989D;&#x5916;&#x7684;<code>padding</code>&#xFF0C;&#x8FD9;&#x4E2A;<code>padding</code>&#x9700;&#x8981;&#x6211;&#x4EEC;&#x8BBE;&#x7F6E;&#x5230;&#x5165;&#x53C2;<code>outRect</code>&#x4E2D;,&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8DDF;&#x968F;&#x6E90;&#x7801;&#x8FDB;&#x884C;&#x67E5;&#x770B;&#xFF0C;&#x8BE5;&#x65B9;&#x6CD5;&#x8C03;&#x7528;&#x5728;<code>RV</code>&#x7684;<code>getItemDecorInsetsForChild()</code>&#x65B9;&#x6CD5;&#x4E2D;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div></pre></td><td class="code"><pre><div class="line"><span class="function">Rect <span class="title">getItemDecorInsetsForChild</span><span class="params">(View child)</span> </span>{</div><div class="line"></div><div class="line">    ...</div><div class="line"></div><div class="line">    <span class="keyword">final</span> Rect insets = lp.mDecorInsets;</div><div class="line">    insets.set(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> decorCount = mItemDecorations.size();</div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; decorCount; i++) {</div><div class="line">        mTempRect.set(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>);</div><div class="line">        <span class="comment">// &#x83B7;&#x53D6;&#x5230;&#x6BCF;&#x4E2A;decor&#x7684;offset&#xFF0C;&#x8BBE;&#x7F6E;&#x5230;Rect&#x4E2D;&#xFF0C;&#x5E76;&#x8FD4;&#x56DE;</span></div><div class="line">        mItemDecorations.get(i).getItemOffsets(mTempRect, child, <span class="keyword">this</span>, mState);</div><div class="line">        insets.left += mTempRect.left;</div><div class="line">        insets.top += mTempRect.top;</div><div class="line">        insets.right += mTempRect.right;</div><div class="line">        insets.bottom += mTempRect.bottom;</div><div class="line">    }</div><div class="line">    lp.mInsetsDirty = <span class="keyword">false</span>;</div><div class="line">    <span class="keyword">return</span> insets;</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x800C;<code>getItemDecorInsetsForChild()</code>&#x65B9;&#x6CD5;&#x662F;&#x5728;<code>LayoutManager</code>&#x7684;<code>measureChild()</code>&#x65B9;&#x6CD5;&#x4E2D;&#x8C03;&#x7528;&#x7684;&#xFF1A;</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div></pre></td><td class="code"><pre><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">measureChild</span><span class="params">(View child, <span class="keyword">int</span> widthUsed, <span class="keyword">int</span> heightUsed)</span> </span>{</div><div class="line">    <span class="keyword">final</span> LayoutParams lp = (LayoutParams) child.getLayoutParams();</div><div class="line"></div><div class="line">    <span class="comment">// &#x83B7;&#x53D6;&#x5230;&#x524D;&#x9762;&#x8FD4;&#x56DE;&#x7684;insets</span></div><div class="line">    <span class="keyword">final</span> Rect insets = mRecyclerView.getItemDecorInsetsForChild(child);</div><div class="line">    widthUsed += insets.left + insets.right;</div><div class="line">    heightUsed += insets.top + insets.bottom;</div><div class="line">    <span class="comment">// &#x5728;&#x6D4B;&#x91CF;child&#x65F6;&#xFF0C;getPaddingLeft() + getPaddingRight() + widthUsed &#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x6700;&#x7EC8;&#x662F;&#x5C06;offset&#x7B97;&#x5728;&#x4E86;padding&#x4E2D;&#x7684;</span></div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> widthSpec = getChildMeasureSpec(getWidth(), getWidthMode(),</div><div class="line">            getPaddingLeft() + getPaddingRight() + widthUsed, lp.width,</div><div class="line">            canScrollHorizontally());</div><div class="line">    <span class="keyword">final</span> <span class="keyword">int</span> heightSpec = getChildMeasureSpec(getHeight(), getHeightMode(),</div><div class="line">            getPaddingTop() + getPaddingBottom() + heightUsed, lp.height,</div><div class="line">            canScrollVertically());</div><div class="line">    <span class="keyword">if</span> (shouldMeasureChild(child, widthSpec, heightSpec, lp)) {</div><div class="line">        child.measure(widthSpec, heightSpec);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x4ECE;&#x4E0A;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x53EF;&#x4EE5;&#x770B;&#x51FA;&#xFF0C;&#x5728;<code>child</code>&#x8FDB;&#x884C;&#x6D4B;&#x91CF;&#x65F6;&#xFF0C;&#x4F1A;&#x5C06;<code>decor</code>&#x4E2D;&#x8BBE;&#x7F6E;&#x7684;&#x503C;&#x4F5C;&#x4E3A;<code>padding</code>&#x4F20;&#x9012;&#x8FDB;&#x53BB;&#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x90FD;&#x6E05;&#x695A;<code>View</code>&#x7684;&#x6D4B;&#x91CF;&#x548C;&#x7ED8;&#x5236;&#x6D41;&#x7A0B;&#xFF1A;<code>measure</code> &#x2014;&gt;<code>layout</code> &#x2014;&gt;<code>draw</code>&#xFF0C;&#x6240;&#x4EE5;&#x7ED3;&#x5408;&#x524D;&#x9762;&#x7684;&#x6E90;&#x7801;&#xFF0C;&#x6D4B;&#x91CF;&#x6D41;&#x7A0B;&#x662F;&#x53D1;&#x751F;&#x5728;<code>draw</code>&#x4E4B;&#x524D;&#x7684;&#xFF0C;<code>onDraw()</code>&#x4F1A;&#x5728;<code>view</code>&#x7684;<code>draw()</code>&#x65B9;&#x6CD5;&#x4E2D;&#x8C03;&#x7528;&#x3002;</p>
+<p>&#x6240;&#x4EE5;<code>ItemDecoration</code>&#x4E2D;3&#x4E2A;&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#x987A;&#x5E8F;&#x662F;&#xFF1A;<code>getItemOffsets</code> &#x2014; &gt; <code>onDraw</code> &#x2014; &gt; <code>onDrawOver</code> &#x3002;</p>
+<p>&#x5177;&#x4F53;&#x7ED8;&#x5236;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x5B98;&#x65B9;&#x63D0;&#x4F9B;&#x7684;<code>DividerItemDecoration</code>&#x7C7B;&#xFF0C;&#x8FD9;&#x91CC;&#x53EA;&#x8BF4;&#x660E;&#x4E00;&#x70B9;&#xFF0C;<strong>&#x6211;&#x4EEC;&#x5728;&#x81EA;&#x5B9A;&#x4E49;<code>ItemDecoration</code>&#x65F6;&#x9700;&#x8981;&#x5C06;<code>getItemOffsets</code>&#x4E2D;&#x8BBE;&#x7F6E;&#x7684;<code>Rect</code>&#x5F53;&#x505A;&#x4E3A;<code>ItemView</code>&#x8BBE;&#x7F6E;<code>padding</code>&#x5C31;&#x884C;&#x4E86;</strong> &#xFF0C;&#x5982;&#x679C;&#x53EA;&#x662F;&#x8BBE;&#x7F6E;&#x95F4;&#x9694;&#xFF0C;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x5B9E;&#x73B0;<code>onDraw()</code>&#xFF0C;&#x53EA;&#x9700;&#x8FD4;&#x56DE;<code>left</code>&#x3001;<code>top</code>&#x3001;<code>right</code>&#x3001;<code>bottom</code>&#x7684;<code>padding</code>&#x503C;&#xFF0C;&#x5982;&#x679C;&#x9700;&#x8981;&#x7ED8;&#x5236;&#xFF0C;<code>getItemOffsets</code>&#x4E2D;&#x4E5F;&#x5FC5;&#x987B;&#x8FD4;&#x56DE;&#x7ED8;&#x5236;&#x7684;&#x533A;&#x57DF;&#xFF0C;&#x5373;<code>padding</code>&#x6240;&#x5360;&#x7684;&#x533A;&#x57DF;&#xFF0C;&#x5426;&#x5219;<code>ondraw()</code>&#x65B9;&#x6CD5;&#x4E2D;&#x7ED8;&#x5236;&#x7684;&#x5185;&#x5BB9;&#x65E0;&#x6CD5;&#x6B63;&#x5E38;&#x663E;&#x793A;&#x51FA;&#x6765;&#x3002;</p>
+<h4 id="&#x7B80;&#x5355;&#x5206;&#x9694;&#x7EBF;"><a href="#&#x7B80;&#x5355;&#x5206;&#x9694;&#x7EBF;" class="headerlink" title="&#x7B80;&#x5355;&#x5206;&#x9694;&#x7EBF;"></a>&#x7B80;&#x5355;&#x5206;&#x9694;&#x7EBF;</h4><blockquote>
+<p>&#x5206;&#x9694;&#x7EBF;&#x662F;&#x6211;&#x4EEC;&#x5728;&#x4F7F;&#x7528;&#x5217;&#x8868;&#x65F6;&#x7528;&#x7684;&#x6700;&#x591A;&#x7684;&#xFF0C;&#x4E0B;&#x9762;&#x7684;&#x4EE3;&#x7801;&#x4F7F;&#x7528;<code>ItemDecoration</code>&#x6765;&#x7ED8;&#x5236;<code>LinearLayoutManager</code>&#x5728;&#x5782;&#x76F4;&#x548C;&#x6C34;&#x5E73;&#x5E03;&#x5C40;&#x65F6;&#x7684;&#x5206;&#x9694;&#x7EBF;&#x3002;</p>
+</blockquote>
+<p>&#x6548;&#x679C;&#x56FE;&#xFF1A;</p>
+<p><img src="/2017/03/24/RecyclerView&#x8BE6;&#x89E3;-ItemDecoration/QQ20170322-5.png" alt="QQ20170322-5"></p>
+<p><img src="/2017/03/24/RecyclerView&#x8BE6;&#x89E3;-ItemDecoration/QQ20170322-0.png" alt="QQ20170322-0"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><div class="line">1</div><div class="line">2</div><div class="line">3</div><div class="line">4</div><div class="line">5</div><div class="line">6</div><div class="line">7</div><div class="line">8</div><div class="line">9</div><div class="line">10</div><div class="line">11</div><div class="line">12</div><div class="line">13</div><div class="line">14</div><div class="line">15</div><div class="line">16</div><div class="line">17</div><div class="line">18</div><div class="line">19</div><div class="line">20</div><div class="line">21</div><div class="line">22</div><div class="line">23</div><div class="line">24</div><div class="line">25</div><div class="line">26</div><div class="line">27</div><div class="line">28</div><div class="line">29</div><div class="line">30</div><div class="line">31</div><div class="line">32</div><div class="line">33</div><div class="line">34</div><div class="line">35</div><div class="line">36</div><div class="line">37</div><div class="line">38</div><div class="line">39</div><div class="line">40</div><div class="line">41</div><div class="line">42</div><div class="line">43</div><div class="line">44</div><div class="line">45</div><div class="line">46</div><div class="line">47</div><div class="line">48</div><div class="line">49</div><div class="line">50</div><div class="line">51</div><div class="line">52</div><div class="line">53</div><div class="line">54</div><div class="line">55</div><div class="line">56</div><div class="line">57</div><div class="line">58</div></pre></td><td class="code"><pre><div class="line"><span class="keyword">private</span> ColorDrawable mDivider;</div><div class="line"><span class="keyword">private</span> Builder builder;</div><div class="line"></div><div class="line"><span class="function"><span class="keyword">private</span> <span class="title">LinearDividerItemDecoration</span><span class="params">(Builder builder)</span> </span>{</div><div class="line">    mDivider = <span class="keyword">new</span> ColorDrawable(Color.GRAY);</div><div class="line">    mDivider.setColor(builder.dividerColor);</div><div class="line">    <span class="keyword">this</span>.builder = builder;</div><div class="line">}</div><div class="line"></div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">onDraw</span><span class="params">(Canvas c, RecyclerView parent, RecyclerView.State state)</span> </span>{</div><div class="line">    c.save();</div><div class="line">    <span class="keyword">int</span> left, right, top, bottom;</div><div class="line"></div><div class="line">    <span class="keyword">int</span> count = parent.getChildCount();</div><div class="line">    <span class="keyword">if</span> (!builder.isShowLastDivider) {</div><div class="line">        count -= <span class="number">1</span>;</div><div class="line">    }</div><div class="line"></div><div class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; count; i++) {</div><div class="line">        <span class="keyword">final</span> View child = parent.getChildAt(i);</div><div class="line">        <span class="keyword">int</span> transitionX = (<span class="keyword">int</span>) ViewCompat.getTranslationX(child);</div><div class="line">        <span class="keyword">int</span> transitionY = (<span class="keyword">int</span>) ViewCompat.getTranslationY(child);</div><div class="line">        <span class="keyword">final</span> RecyclerView.LayoutParams params = (RecyclerView.LayoutParams) child.getLayoutParams();</div><div class="line"></div><div class="line">        <span class="keyword">if</span> (builder.orientation == LinearLayoutManager.VERTICAL) {</div><div class="line">            left = child.getLeft() - params.leftMargin + transitionX + ScreenUtils.dp2px(parent.getContext(), builder.leftMargin);</div><div class="line">            top = child.getBottom() + params.bottomMargin;</div><div class="line">            right = child.getRight() + params.rightMargin - ScreenUtils.dp2px(parent.getContext(), builder.rightMargin);</div><div class="line">            bottom = top + builder.dividerHeight + transitionY;</div><div class="line">        } <span class="keyword">else</span> {</div><div class="line">            top = child.getTop() - params.topMargin + ScreenUtils.dp2px(parent.getContext(), builder.topMargin);</div><div class="line">            bottom = child.getBottom() + params.bottomMargin + transitionY - ScreenUtils.dp2px(parent.getContext(), builder.bottomMargin);</div><div class="line">            left = child.getRight() + params.rightMargin + transitionX;</div><div class="line">            right = left + builder.dividerHeight;</div><div class="line">        }</div><div class="line"></div><div class="line">        mDivider.setBounds(left, top, right, bottom);</div><div class="line">        mDivider.draw(c);</div><div class="line">    }</div><div class="line">    c.restore();</div><div class="line">}</div><div class="line"></div><div class="line"><span class="meta">@Override</span></div><div class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getItemOffsets</span><span class="params">(Rect outRect, View view, RecyclerView parent, RecyclerView.State state)</span> </span>{</div><div class="line">    <span class="keyword">super</span>.getItemOffsets(outRect, view, parent, state);</div><div class="line">    <span class="keyword">int</span> position = parent.getChildAdapterPosition(view);</div><div class="line">    <span class="keyword">int</span> itemCount = parent.getAdapter().getItemCount();</div><div class="line">    <span class="keyword">if</span> (!builder.isShowLastDivider &amp;&amp; position == itemCount - <span class="number">1</span>) {</div><div class="line">        <span class="keyword">return</span>;</div><div class="line">    }</div><div class="line">    <span class="keyword">if</span> (builder.orientation == LinearLayoutManager.VERTICAL) {</div><div class="line">        outRect.set(<span class="number">0</span>, <span class="number">0</span>, <span class="number">0</span>, builder.dividerHeight);</div><div class="line">    } <span class="keyword">else</span> {</div><div class="line">        outRect.set(<span class="number">0</span>, <span class="number">0</span>, builder.dividerHeight, <span class="number">0</span>);</div><div class="line">    }</div><div class="line">}</div></pre></td></tr></table></figure>
+<p>&#x9488;&#x5BF9;&#x4E00;&#x4E9B;&#x7B80;&#x5355;&#x5B9E;&#x7528;&#x7684;<code>ItemDecoration</code>&#xFF0C;&#x6211;&#x5C01;&#x88C5;&#x5230;&#x4E86;Github&#x9879;&#x76EE;&#x4E2D;&#xFF1A;<a href="https://github.com/dcq123/SimpleItemDecoration" target="_blank" rel="external">dcq123/SimpleItemDecoration</a>&#xFF0C;&#x8BE6;&#x7EC6;&#x5B9E;&#x73B0;&#x53EF;&#x4EE5;&#x53C2;&#x8003;&#x8BE5;Lib&#x3002;</p>
+<h4 id="&#x4F7F;&#x7528;Decoration&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x7269;&#x6D41;&#x8BE6;&#x60C5;&#x754C;&#x9762;"><a href="#&#x4F7F;&#x7528;Decoration&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x7269;&#x6D41;&#x8BE6;&#x60C5;&#x754C;&#x9762;" class="headerlink" title="&#x4F7F;&#x7528;Decoration&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x7269;&#x6D41;&#x8BE6;&#x60C5;&#x754C;&#x9762;"></a>&#x4F7F;&#x7528;Decoration&#x5B9E;&#x73B0;&#x4E00;&#x4E2A;&#x7269;&#x6D41;&#x8BE6;&#x60C5;&#x754C;&#x9762;</h4><blockquote>
+<p>&#x4F5C;&#x4E3A;<code>Item</code>&#x7684;&#x88C5;&#x9970;&#x5668;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x7ED8;&#x5236;&#x4EFB;&#x4F55;&#x4E1C;&#x897F;&#xFF0C;&#x6240;&#x4EE5;&#x6709;&#x4E86;<code>Canvas</code>&#x5C31;&#x53EF;&#x4EE5;&#x5145;&#x5206;&#x53D1;&#x6325;&#x6211;&#x4EEC;&#x7684;&#x60F3;&#x8C61;&#x529B;&#xFF0C;&#x9488;&#x5BF9;<code>Item</code>&#x7684;&#x4E00;&#x4E9B;&#x663E;&#x793A;&#xFF0C;&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x653E;&#x5230;&#x88C5;&#x9970;&#x5668;&#x91CC;&#x505A;&#xFF0C;&#x5BF9;&#x4E8E;&#x6BCF;&#x4E2A;<code>Item</code>&#x4E0A;<code>over</code>&#x4E00;&#x5C42;&#x522B;&#x7684;<code>VIew</code>&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x5728;&#x88C5;&#x9970;&#x5668;&#x7684;<code>onDrawOver</code>&#x4E2D;&#x8FDB;&#x884C;&#x5B9E;&#x73B0;&#x3002;&#x4E0B;&#x9762;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x4F7F;&#x7528;&#x88C5;&#x9970;&#x5668;&#x5B9E;&#x73B0;&#x7C7B;&#x578B;&#x5929;&#x732B;&#x7269;&#x6D41;&#x8BE6;&#x60C5;&#x6B65;&#x9AA4;&#x7684;&#x89C6;&#x56FE;&#x3002;</p>
+</blockquote>
+<p>&#x6548;&#x679C;&#x56FE;&#xFF1A;</p>
+<p><img src="/2017/03/24/RecyclerView&#x8BE6;&#x89E3;-ItemDecoration/QQ20170323-1.png" alt="QQ20170323-1"></p>
+<p>&#x5DE6;&#x4FA7;&#x7684;&#x65F6;&#x95F4;&#x7EBF;&#x548C;&#x5706;&#x70B9;&#x5C31;&#x662F;&#x4F7F;&#x7528;&#x88C5;&#x9970;&#x5668;&#x7ED8;&#x5236;&#x4E0A;&#x7684;&#xFF0C;&#x800C;&#x4E14;&#x6BCF;&#x4E2A;<code>item</code>&#x7684;&#x5206;&#x9694;&#x7EBF;&#x4E5F;&#x662F;&#x7528;&#x88C5;&#x9970;&#x5668;&#x6DFB;&#x52A0;&#x4E0A;&#x7684;&#xFF0C;&#x5728;&#x8FD9;&#x4E2A;&#x754C;&#x9762;&#x4E2D;&#xFF0C;&#x6DFB;&#x52A0;&#x4E86;2&#x4E2A;&#x88C5;&#x9970;&#x5668;&#x3002;&#x6240;&#x4EE5;&#x4EE5;&#x540E;&#x5728;<code>ItemView</code>&#x754C;&#x9762;&#x7684;&#x5B9E;&#x73B0;&#x4E0A;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x6362;&#x4E00;&#x4E2A;&#x89D2;&#x5EA6;&#x53BB;&#x8003;&#x8651;&#x5B9E;&#x73B0;&#x65B9;&#x5F0F;&#x4E86;&#x3002;</p>
+<p>&#x4E0A;&#x9762;&#x7684;&#x5B9E;&#x73B0;&#x662F;&#x6211;&#x7684;&#x53E6;&#x4E00;&#x4E2A;&#x5F00;&#x6E90;&#x9879;&#x76EE;&#xFF1A;</p>
+<p><a href="https://github.com/dcq123/StepView" target="_blank" rel="external">dcq123/StepView: &#x4F7F;&#x7528;ItemDecoration&#x5B9E;&#x73B0;&#x7684;&#x7C7B;&#x4F3C;&#x6DD8;&#x5B9D;&#x7269;&#x6D41;&#x8BE6;&#x60C5;&#x6B65;&#x9AA4;&#x754C;&#x9762;</a></p>
+<p>&#x8BE6;&#x60C5;&#x8BF7;&#x67E5;&#x770B;&#x6E90;&#x7801;&#x5B9E;&#x73B0;&#x3002;</p>
+<h4 id="&#x603B;&#x7ED3;"><a href="#&#x603B;&#x7ED3;" class="headerlink" title="&#x603B;&#x7ED3;"></a>&#x603B;&#x7ED3;</h4><p>&#x901A;&#x8FC7;&#x5BF9;<code>ItemDecoration</code>&#x7684;&#x5206;&#x6790;&#xFF0C;&#x6211;&#x4EEC;&#x770B;&#x5230;&#x4E86;<code>RecyclerView</code>&#x6240;&#x62BD;&#x8C61;&#x51FA;&#x6765;&#x7684;&#x8BBE;&#x8BA1;&#x975E;&#x5E38;&#x4FBF;&#x5229;&#x6211;&#x4EEC;&#x6269;&#x5C55;&#xFF0C;&#x5C06;&#x5404;&#x79CD;&#x529F;&#x80FD;&#x6A21;&#x5757;&#x5206;&#x79BB;&#xFF0C;&#x964D;&#x4F4E;&#x8026;&#x5408;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x9488;&#x5BF9;&#x5404;&#x4E2A;&#x5B50;&#x529F;&#x80FD;&#x8FDB;&#x884C;&#x81EA;&#x5DF1;&#x7684;&#x6269;&#x5C55;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>&#x800C;&#x4E14;&#x5728;&#x4E86;&#x89E3;&#x4E86;<code>ItemDecoration</code>&#x540E;&#xFF0C;&#x6211;&#x4EEC;&#x4E5F;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;&#x5B83;&#x5E76;&#x4E0D;&#x4EC5;&#x4EC5;&#x662F;&#x7528;&#x6765;&#x7ED8;&#x5236;&#x5206;&#x9694;&#x7EBF;&#xFF0C;&#x4F7F;&#x7528;&#x5B83;&#x53EF;&#x4EE5;&#x7ED8;&#x5236;&#x4E00;&#x5207;&#x6211;&#x4EEC;&#x60F3;&#x8981;&#x7684;&#x88C5;&#x9970;&#xFF0C;&#x7ED9;&#x4E86;&#x6211;&#x4EEC;&#x4E00;&#x79CD;&#x65B0;&#x7684;&#x5E03;&#x5C40;&#x89D2;&#x5EA6;&#x3002;</p>
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      <a href="/2017/03/24/RecyclerView详解-ItemDecoration/" class="archive-article-date">
+  	<time datetime="2017-03-24T05:46:12.000Z" itemprop="datePublished"><i class="icon-clock"></i>2017-03-24</time>
+</a>
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags"></i>
+		<ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Android/">Android</a></li></ul>
+	</div>
+
+      
+
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+  
+<nav id="article-nav">
+  
+  
+    <a href="/2017/03/16/使用Travis-CI自动构建Github项目/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">使用Travis CI自动构建Github项目</div>
+      <i class="icon-circle-right"></i>
+    </a>
+  
+</nav>
+
+
+
+
+<div class="share_jia">
+	<!-- JiaThis Button BEGIN -->
+	<div class="jiathis_style">
+		<span class="jiathis_txt">Share to: &nbsp; </span>
+		<a class="jiathis_button_facebook"></a> 
+	    <a class="jiathis_button_twitter"></a>
+	    <a class="jiathis_button_plus"></a> 
+	    <a class="jiathis_button_tsina"></a>
+		<a class="jiathis_button_cqq"></a>
+		<a class="jiathis_button_douban"></a>
+		<a class="jiathis_button_weixin"></a>
+		<a class="jiathis_button_tumblr"></a>
+    <a href="http://www.jiathis.com/share" class="jiathis jiathis_txt jtico jtico_jiathis" target="_blank"></a>
+	</div>
+	<script type="text/javascript" src="//v3.jiathis.com/code/jia.js?uid=1405949716054953" charset="utf-8"></script>
+	<!-- JiaThis Button END -->
+</div>
+
+
+
+
+
+
+<div class="duoshuo">
+	<!-- 多说评论框 start -->
+	<div class="ds-thread" data-thread-key="RecyclerView详解-ItemDecoration" data-title="RecyclerView详解--ItemDecoration" data-url="http://yoursite.com/2017/03/24/RecyclerView详解-ItemDecoration/"></div>
+	<!-- 多说评论框 end -->
+	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"litten-hexo"};
+	(function() {
+		var ds = document.createElement('script');
+		ds.type = 'text/javascript';ds.async = true;
+		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.js';
+		ds.charset = 'UTF-8';
+		(document.getElementsByTagName('head')[0] 
+		 || document.getElementsByTagName('body')[0]).appendChild(ds);
+	})();
+	</script>
+	<!-- 多说公共JS代码 end -->
+</div>
+
+
+
+
+
+      </div>
+      <footer id="footer">
+  <div class="outer">
+    <div id="footer-info">
+    	<div class="footer-left">
+    		&copy; 2017 dingchangqing
+    	</div>
+      	<div class="footer-right">
+      		<a href="http://hexo.io/" target="_blank">Hexo</a>  Theme <a href="https://github.com/litten/hexo-theme-yilia" target="_blank">Yilia</a> by Litten
+      	</div>
+    </div>
+  </div>
+</footer>
+    </div>
+    <script>
+	var yiliaConfig = {
+		fancybox: true,
+		mathjax: false,
+		animate: true,
+		isHome: false,
+		isPost: true,
+		isArchive: false,
+		isTag: false,
+		isCategory: false,
+		open_in_new: true,
+		root: "/",
+		innerArchive: true
+	}
+</script>
+
+<script src="/./main.js"></script>
+
+
+    
+<div class="tools-col">
+  <ul class="btn-wrap">
+    
+      <li class="chose" data-hook="tools-section-all"><span class="text">全部</span><i class="icon-book"></i></li>
+    
+    
+      <li data-hook="tools-section-tag"><span class="text">标签</span><i class="icon-price-tags"></i></li>
+    
+    
+    
+  </ul>
+  <div class="tools-wrap">
+    
+    	<section class="tools-section tools-section-all chose">
+    	</section>
+    
+
+    
+    	<section class="tools-section tools-section-tag">
+    			<div class="widget tagcloud" id="js-tagcloud">
+    				<a href="/tags/Android/" style="font-size: 20px;">Android</a> <a href="/tags/CI/" style="font-size: 10px;">CI</a> <a href="/tags/Gradle/" style="font-size: 10px;">Gradle</a> <a href="/tags/IOS/" style="font-size: 15px;">IOS</a> <a href="/tags/RxJava/" style="font-size: 10px;">RxJava</a> <a href="/tags/混淆/" style="font-size: 10px;">混淆</a>
+    			</div>
+    	</section>
+    
+
+    
+
+    
+  </div>
+  
+</div>
+    <!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                <!--  Controls are self-explanatory. Order can be changed. -->
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" style="display:none" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+  </div>
+</body>
+</html>
